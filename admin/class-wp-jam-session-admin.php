@@ -100,4 +100,20 @@ class Wp_Jam_Session_Admin {
 
 	}
 
+	public function display_admin_page() {
+		add_menu_page(
+			'WP Jam Session',
+			'WP Jam Session',
+			'manage_options',
+			'wp-jam-session-settings',
+			array($this,'showSettingsPage'),
+			plugins_url("/img/Jam-Session-Box-Logo.svg", __FILE__), // For Icon
+			'8.0'
+			);
+	}
+
+	public function showSettingsPage () {
+		include plugins_url( '/partials/wp-jam-session-admin-display.php');
+	}
+
 }
