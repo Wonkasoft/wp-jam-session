@@ -113,7 +113,7 @@ class Wp_Jam_Session_Admin {
 	}
 
 	public function showSettingsPage () {
-		include plugins_url( '/partials/wp-jam-session-admin-display.php');
+		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 
 }
