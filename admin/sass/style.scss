@@ -1,0 +1,46 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+div.row {
+  margin-top: 15px;
+}
+
+#settings-wrapper ul.nav-tabs {
+  padding-left: 8px;
+}
+
+#settings-wrapper div.ads-area{
+  border-left: 2px solid #ddd;
+}
+
+#settings-wrapper div.ads-area div.donate-btn {
+  margin-top: 15px;
+}
+
+#settings-tab {
+  margin: 15px;
+}
+
+#settings-wrapper div.setting-area div.form-area {
+  margin-top: 30px;
+}
+
+span.help-badge {
+  display: inline-block;
+  line-height: 1.7;
+  text-align: center;
+  background: #ddd;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+#settings-form input#term-time {
+  width: 40px;
+}
+
+#settings-wrapper .modal {
+  top: 33%;
+}

@@ -21,63 +21,12 @@
         <div class="col-xs-12 setting-area">
             <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#settings-tab">Settings</a></li>
+              <li><a data-toggle="tab" href="#faq-tab">FAQ</a></li>
             </ul> <!-- end nav-tabs -->
             <div class="tab-content">
-              <div id="settings-tab" class="tab-pane fade in active">
-                <div class="row">
-                  <div class="col-xs-2">
-                    <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url('/wp-jam-session/admin/img/Jam-session-Logo.png'); ?>" />
-                  </div>
-                  <div class="col-xs-8">
-                    <h1>JAM SESSION</h1>
-                    <h4>Welcome to Jam Session!<br />
-                          With Jam Session you can setup links with customized parameters that will automatically place the customized parameters into a form for the user.</h4>
-                  </div>
-                </div> <!-- end row -->
-                <div class="row">
-                  <div class="col-xs-12 form-area">
-                    <form id="settings-form">
-                    <div class="col-xs-4">
-                      <div class="form-group">
-                        <label for="url-para">URL Parameter: </label>
-                        <p>example: ?yourParameterHere= <span class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="form-control" id="url-para">
-                      </div>
-                      <div class="form-group">
-                        <label for="input-para">Inputs for validation: </label>
-                        <p>example: ?yourParameterHere=thisInputHere <span class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="form-control" id="input-para">
-                      </div>
-                      <div class="form-group">
-                        <label for="type-form">Type of Form: </label>
-                        <p>example: Select form plugin <span class="help-badge"><strong>?</strong></span></p>
-                        <select type="select" class="form-control" id="type-form">
-                          <option>WooCommerce</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="field-id">Input Field ID: </label>
-                        <p>example: Form Input ID to receive parameter input <span class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="form-control" id="field-id">
-                      </div>
-                      <div class="form-group">
-                        <label for="WC-id">If WC form ID: </label>
-                        <p>example: Form ID to receive parameter input <span class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="form-control" id="WC-id">
-                      </div>
-                      <div class="form-group">
-                        <label for="term-time">Session Termination Time: </label>
-                        <p>example: Time in hours to terminate session <span class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="col-xs-3 form-control" id="term-time">
-                      </div>
-                      </div>
-                      <div class="col-xs-12">
-                      <button type="submit" class="btn btn-primary pull-right">SAVE</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div> <!-- end settings-tab -->
+            <?php include plugin_dir_path( __FILE__ ) . 'wp-jam-session-settings-tab.php'; ?>
+            <?php include plugin_dir_path( __FILE__ ) . 'wp-jam-session-faq-tab.php'; ?>
+              
             </div> <!-- end tab-content -->
         </div> <!-- end col setting-area -->
        </div> <!-- end row -->
@@ -85,17 +34,17 @@
       <div class="col-xs-12 col-md-4 text-center ads-area">
         <div class="row">
           <div class="col-xs-12">
-            <h1>Coming Projects</h1>
+            <h1>NEWS & UPDATES</h1>
           </div> <!-- end col -->
         </div> <!-- end row -->
         <div class="row">
           <div class="col-xs-12">
-            <img src="http://via.placeholder.com/300x250" />
+            <img src="<?php echo plugins_url('/wp-jam-session/admin/img/clixplit-ad.jpg'); ?>" />
           </div> <!-- end col -->
         </div> <!-- end row -->
         <div class="row">
           <div class="col-xs-12">
-            <img src="http://via.placeholder.com/300x250" />
+            <img src="<?php echo plugins_url('/wp-jam-session/admin/img/wonkasoft-ad.jpg'); ?>" />
           </div> <!-- end col -->
         </div> <!-- end row -->
         <div class="row">
@@ -103,7 +52,28 @@
             <p>What's not out there? <br />
                 What business product/service/tool/app <br />
                 would you like someone to create?</p>
-            <button class="btn btn-primary">REQUEST</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#idea-form">REQUEST</button>
+
+            <!-- Modal -->
+              <div class="modal fade" id="idea-form" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Got an Idea?</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
           </div> <!-- end col -->
         </div> <!-- end row -->
         <div class="row">

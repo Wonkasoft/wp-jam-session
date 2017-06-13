@@ -12,7 +12,9 @@
  * @package    Wp_Jam_Session
  * @subpackage Wp_Jam_Session/includes
  */
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * The core plugin class.
  *
