@@ -49,11 +49,11 @@
                         <p>example: Form ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="If using Woocommerce form then place form ID here." class="help-badge"><strong>?</strong></span></p>
                         <input type="text" class="form-control" id="WC-id">
                       </div>
-                      <div class="form-group">
+                      </div>
+                      <div class="form-group col-xs-4">
                         <label for="term-time">Session Termination Time: </label>
                         <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
                         <input type="text" class="col-xs-3 form-control" id="term-time">
-                      </div>
                       </div>
                       <div class="col-xs-12">
                       <button type="submit" class="btn btn-primary pull-right">SAVE</button>
