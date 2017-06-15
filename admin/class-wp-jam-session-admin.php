@@ -73,6 +73,7 @@ class Wp_Jam_Session_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( $this->plugin_name . '-bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), '3.3.7', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -96,6 +97,7 @@ class Wp_Jam_Session_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_script( $this->plugin_name . 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ), '3.3.7', false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
@@ -107,7 +109,7 @@ class Wp_Jam_Session_Admin {
 			'manage_options',
 			'wp-jam-session-settings',
 			array($this,'showSettingsPage'),
-			plugins_url("/img/Jam-Session-Box-Logo.svg", __FILE__), // For Icon
+			plugins_url("/img/Jam-Session-Box-Logo.svg", __FILE__),
 			'8.0'
 			);
 	}
