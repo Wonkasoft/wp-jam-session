@@ -62,7 +62,6 @@ class Wp_Jam_Session_Admin {
 	public function enqueue_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wp_Jam_Session_Loader as all of the hooks are defined
@@ -72,9 +71,15 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+		// Check to see if bootstrap style is already enqueue before setting the enqueue
+		$style = 'bootstrap';
+		if( ( ! wp_style_is( $style, 'enqueued' ) ) && ( ! wp_style_is( $style, 'done' ) ) ) {
+	    //queue up your bootstrap
+			wp_enqueue_style( $style, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all' );
+		}
 
-		wp_enqueue_style( $this->plugin_name . '-bootstrap-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), '3.3.7', 'all' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
 
 	}
 
@@ -86,7 +91,6 @@ class Wp_Jam_Session_Admin {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wp_Jam_Session_Loader as all of the hooks are defined
@@ -96,10 +100,16 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name . 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ), '3.3.7', false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js', array( 'jquery' ), $this->version, false );
-
+		
+		// Check to see if bootstrap js is already enqueue before setting the enqueue
+		$bootstrapjs = 'bootstrap-js';
+		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
+		 	// enqueue bootstrap js
+			wp_enqueue_script( $bootstapjs, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', false );
+		 } 
+		
+		wp_enqueue_script( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
+	
 	}
 
 	public function display_admin_page() {
