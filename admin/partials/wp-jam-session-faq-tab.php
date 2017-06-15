@@ -7,7 +7,7 @@
 */
 ?>
 
-<div id="faq-tab" class="tab-pane fade in active">
+<div id="faq-tab" class="tab-pane fade">
     <div class="row">
         <div class="col-xs-12">
           <section id="page-title">
