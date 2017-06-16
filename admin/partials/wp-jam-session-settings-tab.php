@@ -28,11 +28,6 @@
                         <input type="text" class="form-control" id="url-para">
                       </div>
                       <div class="form-group">
-                        <label for="input-para">Inputs for validation: </label>
-                        <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
-                        <input type="text" class="form-control" id="input-para">
-                      </div>
-                      <div class="form-group">
                         <label for="type-form">Type of Form: </label>
                         <p>example: Select form plugin <span data-toggle="tooltip" data-placement="top" title="Please select the type of form that you are using." class="help-badge"><strong>?</strong></span></p>
                         <select type="select" class="form-control" id="type-form">
@@ -42,12 +37,17 @@
                           <option>Gravity Forms</option>
                         </select>
                       </div>
-                      </div> <!-- end first col -->
-                      <div class="col-xs-5">
                       <div class="form-group">
                         <label for="field-id">Input Field ID: </label>
                         <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
                         <input type="text" class="form-control" id="field-id">
+                      </div>
+                      </div> <!-- end first col -->
+                      <div class="col-xs-5">
+                      <div class="form-group">
+                        <label for="input-para">Inputs for validation: </label>
+                        <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
+                        <input type="text" class="form-control" id="input-para">
                       </div>
                       <div class="form-group">
                         <label for="WC-id">If WC form ID: </label>
@@ -60,6 +60,17 @@
                         <input type="text" class="col-xs-3 form-control" id="term-time">
                       </div>
                       </div> <!-- end second col -->
+                      <div class="col-xs-2 text-center">
+                        <?php 
+                        /**
+                        *
+                        * This is for displaying the accepted values list on the settings tab.
+                        *
+                        *
+                        * @since    1.0.0
+                        */
+                        include plugin_dir_path( __FILE__ ) . 'wp-jam-session-accepted-values.php'; ?>
+                      </div>
                       <div class="col-xs-12">
                       <button type="submit" class="btn jam-btn pull-right">SAVE</button>
                       </div>

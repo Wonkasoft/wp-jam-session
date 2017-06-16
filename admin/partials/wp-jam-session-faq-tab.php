@@ -64,8 +64,8 @@
       <div class="row">
         <div class="col-xs-10">
           <section id="session-time">
-            <h2>What is a URL Parameter?</h2>
-            <p>A URL Parameter is data that follows a ? at the end of a URL.</p>
+            <h2>What is a Session Termination Time?</h2>
+            <p>This option is for setting a time of expiration for the session that a users .</p>
           </section>
         </div>
       </div>
