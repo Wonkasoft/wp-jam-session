@@ -73,14 +73,13 @@ class Wp_Jam_Session_Admin {
 		 */
 		
 		// Check to see if bootstrap style is already enqueue before setting the enqueue
+		wp_enqueue_style( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), $this->version, 'all' );
+
 		$style = 'bootstrap';
 		if( ( ! wp_style_is( $style, 'enqueued' ) ) && ( ! wp_style_is( $style, 'done' ) ) ) {
 	    //queue up your bootstrap
-			wp_enqueue_style( $style, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all' );
+			wp_enqueue_style( $style, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), '3.3.7', 'all' );
 		}
-
-		wp_enqueue_style( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -102,13 +101,13 @@ class Wp_Jam_Session_Admin {
 		 */
 		
 		// Check to see if bootstrap js is already enqueue before setting the enqueue
+		wp_enqueue_script( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
+
 		$bootstrapjs = 'bootstrap-js';
 		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
 		 	// enqueue bootstrap js
 			wp_enqueue_script( $bootstrapjs, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', false );
 		 } 
-		
-		wp_enqueue_script( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
 	
 	}
 
