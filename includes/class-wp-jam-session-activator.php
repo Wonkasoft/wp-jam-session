@@ -31,6 +31,6 @@ class Wp_Jam_Session_Activator {
 	 */
 	public static function activate() {
 
-	}
-
+  }
+  
 }
