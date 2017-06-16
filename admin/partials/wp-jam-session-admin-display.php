@@ -19,134 +19,78 @@
       <div class="col-xs-12 col-md-8">
        <div class="row">
         <div class="col-xs-12 setting-area">
-            <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#settings-tab">Settings</a></li>
-              <li><a data-toggle="tab" href="#faq-tab">FAQ</a></li>
-            </ul> <!-- end nav-tabs -->
-            <div class="tab-content">
-            <?php include plugin_dir_path( __FILE__ ) . 'wp-jam-session-settings-tab.php'; ?>
-            <?php include plugin_dir_path( __FILE__ ) . 'wp-jam-session-faq-tab.php'; ?>
-              
-            </div> <!-- end tab-content -->
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#settings-tab">Settings</a></li>
+            <li><a data-toggle="tab" href="#faq-tab">FAQ</a></li>
+          </ul> <!-- end nav-tabs -->
+          <div class="tab-content">
+
+          <?php
+          /**
+          *
+          * This will load all of the settings
+          *
+          * This loads the settings form
+          * 
+          * 
+          * @since 1.0.0
+          */
+          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-settings-tab.php';
+
+          /**
+          *
+          * This will load the FAQ tab
+          *
+          * 
+          * 
+          * 
+          * @since 1.0.0
+          */
+          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-faq-tab.php'; ?>
+      
+          </div> <!-- end tab-content -->
         </div> <!-- end col setting-area -->
-       </div> <!-- end row -->
-      </div> <!-- end col -->
-      <div class="col-xs-12 col-md-4 ads-area">
-        <div class="row">
-          <div class="col-xs-12 text-center">
-            <h1>NEWS & UPDATES</h1>
-          </div> <!-- end col -->
-        </div> <!-- end row -->
-        <div class="row">
-          <div class="col-xs-12 text-center">
+      </div> <!-- end row -->
+    </div> <!-- end col -->
+    <div class="col-xs-12 col-md-4 ads-area">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h1>NEWS & UPDATES</h1>
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+      <div class="row">
+        <div class="col-xs-12 text-center">
           <a href="https://wonkasoft.com/clixplit" id="first-ad">
             <img src="<?php echo plugins_url('/wp-jam-session/admin/img/clixplit-ad.jpg'); ?>" />
-            </a>
-          </div> <!-- end col -->
-        </div> <!-- end row -->
-        <div class="row">
-          <div class="col-xs-12 text-center">
+          </a>
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+      <div class="row">
+        <div class="col-xs-12 text-center">
           <a href="https://wonkasoft.com" id="second-ad">
             <img src="<?php echo plugins_url('/wp-jam-session/admin/img/wonkasoft-ad.jpg'); ?>" />
-            </a>
-          </div> <!-- end col -->
-        </div> <!-- end row -->
-        <div class="row">
-          <div class="col-xs-12  text-center">
-            <p>What's not out there? <br />
-                What business product/service/tool/app <br />
-                would you like someone to create?</p>
+          </a>
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+      <div class="row">
+        <div class="col-xs-12  text-center">
+          <p>What's not out there? <br />
+            What business product/service/tool/app <br />
+            would you like someone to create?</p>
             <button class="btn jam-btn" data-toggle="modal" data-target="#idea-form">REQUEST</button>
-            </div> <!-- end col -->
-            <!-- Modal -->
-              <div class="modal fade" id="idea-form" role="dialog">
-                <div class="modal-dialog">
-                <?php $first_num = rand(0,9); $second_num = rand(0,9); $js_validation = $first_num + $second_num;
-                $errName = "";
-                $errEmail = "";
-                $errHuman = "";
-                $result = "";
-                $js_validate = (!isset($_POST['js-validate'])) ? "": intval($_POST['js-validate']);
-                $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']);
-                $email = (!isset($_POST['email'])) ? "": sanitize_email($_POST['email']);
-                $message = (!isset($_POST['message'])) ? "": sanitize_textarea_field($_POST['message']);
-                $human = (!isset($_POST['human'])) ? "": intval($_POST['human']);
-                if (isset($_POST['submit'])) {
-                  $from = 'WP JAM SESSION REQUEST FORM'; 
-                  $to = 'support@wonkasoft.com'; 
-                  $subject = 'Message from Jam Session request form';
-                   
-                  $body = "From: $name\n E-Mail: $email\n Message:\n $message";
-                  if (!$_POST['name']) {
-                    $errName = 'Please enter your name';
-                  }
-                  if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                    $errEmail = 'Please enter a valid email address';
-                  }
-                  if ($human !== $js_validate) {
-                    $errHuman = 'Your anti-spam is incorrect';
-                  }
-                  // If there are no errors, send the email
-                  if (!$errName && !$errEmail && !$errHuman) {
-                    if (mail ($to, $subject, $body, $from)) {
-                      $result='<div class="alert alert-success">Thank You! I will be in touch</div>';
-                    } else {
-                      $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
-                    }
-                  }
-                }
-                ?>
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header text-center">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Got an Idea?</h4>
-                    </div>
-                    <div class="modal-body">
-                      <form class="form-horizontal" role="form" method="post">
-  <div class="form-group">
-    <div class="col-xs-12">
-      <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']); echo $name; ?>">
-      <?php echo "<p class='text-danger'>$errName</p>";?>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php $email = (!isset($_POST['email'])) ? "": sanitize_email($_POST['email']); echo $email; ?>">
-      <?php echo "<p class='text-danger'>$errEmail</p>";?>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <textarea class="form-control" rows="4" name="message" placeholder="Your Message"><?php $message = (!isset($_POST['message'])) ? "": sanitize_text_field($_POST['message']); echo $message; ?></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <input type="hidden" class="form-control" id="js-validate" name="js-validate" value="<?php echo $js_validation; ?>">
-      <input type="text" class="form-control" id="human" name="human" placeholder="<?php echo $first_num . ' + ' . $second_num . ' = ?'; ?>" value="<?php $human = (!isset($_POST['human'])) ? "": sanitize_text_field($_POST['human']); echo $human; ?>">
-      <?php echo "<p class='text-danger'>$errHuman</p>";?>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <input id="submit" name="submit" type="submit" value="Send" class="btn jam-btn">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-xs-12">
-      <?php echo $result; ?>
-    </div>
-  </div>
-</form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn jam-btn" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
+          </div> <!-- end col -->
+          <?php
+
+          /**
+          *
+          * This will load the request modal dialog
+          *
+          * 
+          * 
+          * 
+          * @since 1.0.0
+          */
+          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-request.php'; ?>
 
         </div> <!-- end row -->
         <div class="row">

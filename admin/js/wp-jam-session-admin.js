@@ -31,6 +31,22 @@
 
 	 $( document ).ready(function() {
 	 	$('[data-toggle="tooltip"]').tooltip();
+
+	 	// Tigger a click event for to save settings
+	 	// ajax call for all form data to be stored
+	 	// in the options table
+	 	$('#save-settings').click( function(event) {
+	 		event.preventDefault();
+	 		$.ajax({
+	 			url: '../wp-content/plugins/wp-jam-session/admin/partials/wp-jam-session-settings-ajax.php',
+	 			data: $('#settings-form').serialize(),
+	 			type: "POST",
+	 			dataType: "text",
+	 			success: function(result) {
+	 			console.log(result);
+      	}
+	 		});
+	 	});
 	 });
 
 })( jQuery );

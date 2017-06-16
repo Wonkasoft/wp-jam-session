@@ -116,6 +116,11 @@ class Wp_Jam_Session {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-jam-session-admin.php';
 
 		/**
+		 * The page responsible for handling settings data.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/wp-jam-session-settings-ajax.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
