@@ -4,7 +4,7 @@
  */
 button.jam-btn,
 input.jam-btn {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 div.row {
@@ -58,8 +58,8 @@ input.jam-btn {
   color: #fff;
   font-size: 15pt;
   padding: 8px 45px;
-  background: -webkit-linear-gradient(-214deg, rgba(#63fcff, .8) 0%, rgba(#0086aa, 1) 100%);
-  background: linear-gradient(-214deg, rgba(#63fcff, .8) 0%, rgba(#0086aa, 1) 100%);
+  background: -webkit-linear-gradient(-214deg, rgba(#63fcff, 0.8) 0%, rgba(#0086aa, 1) 100%);
+  background: linear-gradient(-214deg, rgba(#63fcff, 0.8) 0%, rgba(#0086aa, 1) 100%);
 }
 
 button.jam-btn:hover, button.jam-btn:active, button.jam-btn:focus,

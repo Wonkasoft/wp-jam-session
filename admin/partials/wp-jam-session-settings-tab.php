@@ -21,7 +21,7 @@
                 <div class="row">
                   <div class="col-xs-12 form-area">
                     <form id="settings-form">
-                    <div class="col-xs-4">
+                    <div class="col-xs-5">
                       <div class="form-group">
                         <label for="url-para">URL Parameter: </label>
                         <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
@@ -43,7 +43,7 @@
                         </select>
                       </div>
                       </div> <!-- end first col -->
-                      <div class="col-xs-4">
+                      <div class="col-xs-5">
                       <div class="form-group">
                         <label for="field-id">Input Field ID: </label>
                         <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
