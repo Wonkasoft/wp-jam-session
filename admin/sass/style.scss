@@ -2,6 +2,10 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+button.jam-btn,
+input.jam-btn {
+  transition: all 0.2s ease-in-out;
+}
 
 div.row {
   margin-top: 15px;
@@ -42,5 +46,26 @@ span.help-badge {
 }
 
 #settings-wrapper .modal {
-  top: 33%;
+  top: 20%;
+}
+
+.wp-admin select {
+  height: 34px
+}
+
+button.jam-btn,
+input.jam-btn {
+  color: #fff;
+  font-size: 15pt;
+  padding: 8px 45px;
+  background: -webkit-linear-gradient(-214deg, rgba(#63fcff, .8) 0%, rgba(#0086aa, 1) 100%);
+  background: linear-gradient(-214deg, rgba(#63fcff, .8) 0%, rgba(#0086aa, 1) 100%);
+}
+
+button.jam-btn:hover, button.jam-btn:active, button.jam-btn:focus,
+input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
+  color: #18375d;
+  outline: none;
+  background: -webkit-linear-gradient(-214deg, rgba(#0086aa, 0.8) 0%, rgba(#63fcff, 1) 100%);
+  background: linear-gradient(-214deg, rgba(#0086aa, 0.8) 0%, rgba(#63fcff, 1) 100%);
 }
