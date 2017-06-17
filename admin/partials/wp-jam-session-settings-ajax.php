@@ -15,27 +15,42 @@ $file_path = realpath(dirname(__FILE__). '/../../../../..'). '/';
 require( $file_path . 'wp-load.php' );
 global $wpdb;
 
-$url_para = (!isset($_POST['url-para'])) ? '': $_POST['url-para'];
-$input_para = (!isset($_POST['input-para'])) ? '': $_POST['input-para'];
-$type_form = (!isset($_POST['type-form'])) ? '': $_POST['type-form'];
-$field_id = (!isset($_POST['field-id'])) ? '': $_POST['field-id'];
-$WC_id = (!isset($_POST['WC-id'])) ? '': $_POST['WC-id'];
-$term_time = (!isset($_POST['term-time'])) ? '': $_POST['term-time'];
+$url_para = (!isset($_POST['url-para'])) ? '': sanitize_text_field($_POST['url-para']);
+$input_para = (!isset($_POST['input-para'])) ? '': sanitize_text_field($_POST['input-para']);
+$type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
+$field_id = (!isset($_POST['field-id'])) ? '': sanitize_text_field($_POST['field-id']);
+$WC_id = (!isset($_POST['WC-id'])) ? '': sanitize_text_field($_POST['WC-id']);
+$term_time = (!isset($_POST['term-time'])) ? '': sanitize_text_field($_POST['term-time']);
 
 // These are for checking the empty inputs
-(!isset($_POST['url-para'])) ? $_POST['url-para'] = '': $_POST['url-para'];
-(!isset($_POST['input-para'])) ? $_POST['input-para'] = '': $_POST['input-para'];
-(!isset($_POST['field-id'])) ? $_POST['field-id'] = '': $_POST['field-id'];
-(!isset($_POST['WC-id'])) ? $_POST['WC-id'] = '': $_POST['WC-id'];
-(!isset($_POST['term-time'])) ? $_POST['term-time'] = '': $_POST['term-time'];
+(!isset($_POST['url-para'])) ? $_POST['url-para'] = '': sanitize_text_field($_POST['url-para']);
+(!isset($_POST['input-para'])) ? $_POST['input-para'] = '': sanitize_text_field($_POST['input-para']);
+(!isset($_POST['field-id'])) ? $_POST['field-id'] = '': sanitize_text_field($_POST['field-id']);
+(!isset($_POST['WC-id'])) ? $_POST['WC-id'] = '': sanitize_text_field($_POST['WC-id']);
+(!isset($_POST['term-time'])) ? $_POST['term-time'] = '': sanitize_text_field($_POST['term-time']);
 
 if ( ( !$_POST['url-para'] ) && ( !$_POST['input-para'] ) && ( !$_POST['field-id'] ) && ( !$_POST['WC-id'] ) && ( !$_POST['term-time'] ) ) { 
-  
+
+  // This is for getting data to build accepted values list
   if ( !empty($_POST['sendvalues']) ) {
   $input_array_onload = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
   $return = json_encode($input_array_onload);
   echo $return;
 }
+
+// This is for removing values
+if ( !empty($_POST['remove-value']) ) {
+  $input_array_remove = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
+  if(($key = array_search($_POST['remove-value'], $input_array_remove)) !== false) {
+    unset($input_array_remove[$key]);
+    $input_array_remove = array_values($input_array_remove);
+  }
+  update_option( 'wp-jam-session-input-para', $input_array_remove, 'yes' );
+  $return = json_encode($input_array_remove);
+  echo $return;
+
+}
+
   return;
 }
 
@@ -60,6 +75,9 @@ if ( !empty($_POST['input-para']) ) {
     foreach ($cleaning_array as $value) {
       array_push($input_array, $value);
     }
+    $input_array = array_unique($input_array);
+    $input_array = array_slice($input_array, 0, 5);
+
     update_option( 'wp-jam-session-input-para', $input_array, 'yes' );
     $return = json_encode($input_array);
     echo $return;
@@ -68,7 +86,6 @@ if ( !empty($_POST['input-para']) ) {
 if ( !empty($_POST['WC-id']) ) {
 
     update_option( 'wp-jam-session-WC-id', $WC_id, 'yes' );
-
 }
 
 if ( !empty($_POST['term-time']) ) {

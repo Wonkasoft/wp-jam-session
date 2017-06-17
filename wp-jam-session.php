@@ -72,4 +72,5 @@ function run_wp_jam_session() {
 	$plugin->run();
 
 }
+
 run_wp_jam_session();

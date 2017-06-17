@@ -139,7 +139,5 @@ class Wp_Jam_Session_Admin {
 	    array_unshift($links, $settings_link, $support_link, $donate_link); 
 	    return $links; 
   	}
-
 	}
-
 }

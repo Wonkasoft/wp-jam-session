@@ -32,6 +32,7 @@
 	 $( document ).ready(function() {
 	 	$('[data-toggle="tooltip"]').tooltip();
 
+	 	// Get accepted values on load
 	 	get_accepted_values();
 
 	 	function get_accepted_values() {
@@ -44,11 +45,11 @@
 	 			document.close();
 	 			result = JSON.parse(result);
 	 			build_accepted_values(result);
-      	}
+      				}
 	 		});
 	 	}
 
-
+	 	
 	 	// Tigger a click event for to save settings
 	 	// ajax call for all form data to be stored
 	 	// in the options table
@@ -61,6 +62,8 @@
 	 			data: $('#settings-form').serialize(),
 	 			success: function(result) {
 	 			document.close();
+
+	 			$('[name="input-para"]').val('');
 	 			result = JSON.parse(result);
 	 			build_accepted_values(result);
       	}
@@ -71,16 +74,38 @@
 	 });
 	 
 	 function build_accepted_values(values) {
-// 	 	for (var i = 0; i < values.length; i++) {
-// 		$('#accepted-values').append('<li class="list-group-item">' + values[i] + '</li>');
-// }
+
+	 	// for refreshing all accepted values
+	 	$('.list-group-item').remove();
+
+	 	// This builds the list of accepted values
 		$.each(values, function (i, val) {
-       $('#accepted-values').append('<li class="list-group-item" id="'+ val +'">' + val + '<span class="badge">x</span></li>');
-       $('.list-group-item').hover(function() {
-	 				$(this).toggleClass('active');
-	 			});
+    	$('#accepted-values').append('<li class="list-group-item" id="' + val + '">' + val + '<span class="badge value-badge">x</span></li>');
     });
 
+		$('.list-group-item').hover( function() {
+	 		$(this).toggleClass('active');
+	 	});
+
+	 	$('.value-badge').click( function () {
+	 		var html_text = $(this).parent('li').attr('id');
+	 		remove_accepted_value(html_text);
+	 	});
+
+	 }
+
+	 function remove_accepted_value(value) {
+	 	$.ajax({
+	 			type: "POST",
+	 			dataType: "text",
+	 			url: $('#settings-form').attr('action'),
+	 			data: {'remove-value': value },
+	 			success: function(result) {
+	 			document.close();
+	 			result = JSON.parse(result);
+	 			build_accepted_values(result);
+      				}
+	 		});
 	 }
 
 })( jQuery );
