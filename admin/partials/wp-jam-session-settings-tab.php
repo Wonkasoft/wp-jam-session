@@ -35,12 +35,56 @@
             <div class="form-group">
               <label for="type-form">Type of Form: </label>
               <p>example: Select form plugin <span data-toggle="tooltip" data-placement="top" title="Please select the type of form that you are using." class="help-badge"><strong>?</strong></span></p>
-              <select type="select" name="type-form" class="form-control" id="type-form" value="<?php echo get_option('wp-jam-session-type-form') ?>">
-                <option value="" disabled selected>Select your option</option>
-                <option value="WooCommerce">WooCommerce</option>
-                <option value="Contact Forms 7">Contact Forms 7</option>
-                <option value="Ninja Forms">Ninja Forms</option>
-                <option value="Gravity Forms">Gravity Forms</option>
+              <select type="select" name="type-form" class="form-control" id="type-form">
+              <?php  
+                $selected_option = get_option('wp-jam-session-type-form');
+                switch ($selected_option) {
+                  case 'WooCommerce': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce" selected>WooCommerce</option>
+                    <option value="Contact Forms 7">Contact Forms 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms</option>
+                    <?php
+                    break;
+
+                    case 'Contact Forms 7': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Forms 7" selected>Contact Forms 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms</option>
+                    <?php
+                    break;
+
+                    case 'Ninja Forms': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Forms 7">Contact Forms 7</option>
+                    <option value="Ninja Forms" selected>Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms</option>
+                    <?php
+                    break;
+
+                    case 'Gravity Forms': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Forms 7">Contact Forms 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms" selected>Gravity Forms</option>
+                    <?php
+                    break;
+                  
+                  default: ?>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="WooCommerce">WooCommerce</option>
+                  <option value="Contact Forms 7">Contact Forms 7</option>
+                  <option value="Ninja Forms">Ninja Forms</option>
+                  <option value="Gravity Forms">Gravity Forms</option>
+                  <?php
+                    break;
+                }
+              ?>
               </select>
             </div>
             <div class="form-group">

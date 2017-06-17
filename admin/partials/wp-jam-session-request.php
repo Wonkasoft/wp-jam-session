@@ -40,6 +40,8 @@
       if ($human !== $js_validate) {
         $errHuman = 'Your anti-spam is incorrect';
       }
+
+      
                   // If there are no errors, send the email
       if (!$errName && !$errEmail && !$errHuman) {
         if (mail ($to, $subject, $body, $from)) {
