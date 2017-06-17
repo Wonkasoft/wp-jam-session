@@ -62,7 +62,7 @@
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="term-time" class="col-xs-3 form-control" id="term-time">
+              <input type="number" name="term-time" class="col-xs-3 form-control" id="term-time">
             </div>
           </div> <!-- end second col -->
           <div class="col-xs-2 text-center">
@@ -79,7 +79,7 @@
 
           </div>
           <div class="col-xs-12">
-            <button type="submit" class="btn jam-btn pull-right">SAVE</button>
+            <button type="submit" id="save-settings" class="btn jam-btn pull-right">SAVE</button>
           </div>
         </form>
         </div>

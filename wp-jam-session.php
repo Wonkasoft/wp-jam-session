@@ -36,7 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function activate_wp_jam_session() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-jam-session-activator.php';
-	Wp_Jam_Session_Activator::activate();
+  Wp_Jam_Session_Activator::activate();
 }
 
 /**
@@ -44,8 +44,8 @@ function activate_wp_jam_session() {
  * This action is documented in includes/class-wp-jam-session-deactivator.php
  */
 function deactivate_wp_jam_session() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-jam-session-deactivator.php';
-	Wp_Jam_Session_Deactivator::deactivate();
+  require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-jam-session-deactivator.php';
+  Wp_Jam_Session_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_wp_jam_session' );
@@ -74,21 +74,54 @@ function run_wp_jam_session() {
 }
 run_wp_jam_session();
 
-/**
-*
-* Add settings, support, and donate links on plugin page.
-*
-* These links are only added to the action links
-* and should show when plugin is actived
-* 
-* @since 1.0.0
-*/
-function add_settings_link($links) { 
-  $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
-  $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
-  $donate_link = '<a href="https://wonkasoft.com/wp-jam-session/donate" target="blank">Donate</a>';
-  array_unshift($links, $settings_link, $support_link, $donate_link); 
-  return $links; 
-}
-     
 add_filter("plugin_action_links_" . plugin_basename(__FILE__), 'add_settings_link' );
+  function add_settings_link($links) { 
+    $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
+    $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
+    $donate_link = '<a href="https://wonkasoft.com/wp-jam-session/donate" target="blank">Donate</a>';
+    array_unshift($links, $settings_link, $support_link, $donate_link); 
+    return $links; 
+  }
+
+// add_action('init', 'register_my_session', 1);
+// add_action('wp_logout', 'myEndSession');
+// add_action('wp_login', 'myEndSession');
+// add_action('wp_head', 'header_config');
+// // Setup session
+// function register_my_session() {
+//   if( !session_id() )
+//   {
+//     session_start();
+//   }
+// }
+// // End session
+// function myEndSession() {
+//   session_destroy ();
+// }
+// // Set session variable for rep number and discount number
+// // Validate by parameter
+// // If repnum is not set then the user will be redirected to the 404 page
+// function header_config() {
+// // Validation by repnum
+// // if valid then set session variable for repnum
+//   if (!$_SESSION['repnum'] && $_GET['repnum'] != '') {
+//     $_SESSION['repnum'] = $_GET['repnum'];
+//   } elseif ($_SESSION['repnum'] == '' && $_GET['repnum'] =='') {
+//           status_header( 404 );
+//           nocache_headers();
+//           include( get_query_template( '404' ) );
+//           die();
+//     }
+// // If new parameter sent update session variable for repnum
+//   if ($_SESSION['repnum'] != $_GET['repnum'] && $_GET['repnum'] != '') {
+//     $_SESSION['repnum'] = $_GET['repnum'];
+//   }
+// // Set discount variable by parameter
+//   if (!$_SESSION['discount'] && $_GET['discount']!=''){
+//     $_SESSION['discount'] = $_GET['discount'];
+//   }
+// // If new parameter sent update session variable for discount
+//   if ($_SESSION['discount'] != $_GET['discount'] && $_GET['discount'] != '') {
+//     $_SESSION['discount'] = $_GET['discount'];
+//   }
+// }

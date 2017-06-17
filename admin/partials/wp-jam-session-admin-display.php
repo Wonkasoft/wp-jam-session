@@ -46,7 +46,8 @@
           * 
           * @since 1.0.0
           */
-          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-faq-tab.php'; ?>
+          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-faq-tab.php'; 
+          ?>
       
           </div> <!-- end tab-content -->
         </div> <!-- end col setting-area -->
@@ -90,7 +91,8 @@
           * 
           * @since 1.0.0
           */
-          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-request.php'; ?>
+          include plugin_dir_path( __FILE__ ) . 'wp-jam-session-request.php'; 
+          ?>
 
         </div> <!-- end row -->
         <div class="row">

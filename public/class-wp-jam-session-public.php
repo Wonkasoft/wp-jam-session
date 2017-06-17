@@ -62,7 +62,7 @@ class Wp_Jam_Session_Public {
 	public function enqueue_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * 
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wp_Jam_Session_Loader as all of the hooks are defined
@@ -85,7 +85,7 @@ class Wp_Jam_Session_Public {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * 
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wp_Jam_Session_Loader as all of the hooks are defined
