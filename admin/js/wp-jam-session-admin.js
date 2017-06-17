@@ -31,12 +31,9 @@
 
 	 $( document ).ready(function() {
 	 	$('[data-toggle="tooltip"]').tooltip();
-	 	
-	 	$('.list-group-item').mouseover(function() {
-	 		$('.list-group-item').addClass('active');
-	 	});
 
 	 	get_accepted_values();
+
 	 	function get_accepted_values() {
 	 		$.ajax({
 	 			type: "POST",
@@ -46,7 +43,6 @@
 	 			success: function(result) {
 	 			document.close();
 	 			result = JSON.parse(result);
-	 			console.log(result);
 	 			build_accepted_values(result);
       	}
 	 		});
@@ -65,12 +61,12 @@
 	 			data: $('#settings-form').serialize(),
 	 			success: function(result) {
 	 			document.close();
-	 			console.log(result);
 	 			result = JSON.parse(result);
 	 			build_accepted_values(result);
       	}
-
 	 		});
+
+	 		$(this).val()='';
 	 	});
 	 });
 	 
@@ -79,7 +75,10 @@
 // 		$('#accepted-values').append('<li class="list-group-item">' + values[i] + '</li>');
 // }
 		$.each(values, function (i, val) {
-       $('#accepted-values').append('<li class="list-group-item">' + val + '</li>');
+       $('#accepted-values').append('<li class="list-group-item" id="'+ val +'">' + val + '<span class="badge">x</span></li>');
+       $('.list-group-item').hover(function() {
+	 				$(this).toggleClass('active');
+	 			});
     });
 
 	 }

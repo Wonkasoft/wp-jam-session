@@ -39,6 +39,7 @@ if ( ( !$_POST['url-para'] ) && ( !$_POST['input-para'] ) && ( !$_POST['field-id
   return;
 }
 
+
 if ( !empty($_POST['url-para']) ) {
     update_option( 'wp-jam-session-url-para', $url_para, 'yes' );
 }
