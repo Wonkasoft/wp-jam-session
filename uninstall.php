@@ -29,3 +29,12 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+if ( current_user_can('manage_options') ) {
+  delete_option( 'wp-jam-session-url-para' )
+  delete_option( 'wp-jam-session-type-form' )
+  delete_option( 'wp-jam-session-field-id' )
+  delete_option( 'wp-jam-session-input-para' )
+  delete_option( 'wp-jam-session-WC-id' )
+  delete_option( 'wp-jam-session-term-time' )
+}

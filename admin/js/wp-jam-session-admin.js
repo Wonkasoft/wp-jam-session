@@ -34,7 +34,7 @@
 
 	 	if ($('#accepted-values').length > 0) {
 		 	// Get accepted values on load
-		 	get_accepted_values();	
+		 	get_accepted_values();
 	 	}
 
 	 	function get_accepted_values() {
@@ -44,9 +44,13 @@
 	 			url: $('#settings-form').attr('action'),
 	 			data: {'sendvalues':'sent'},
 	 			success: function(result) {
-	 			result = JSON.parse(result);
-	 			build_accepted_values(result);
-      				}
+	 				if (result !="") {
+			 			result = JSON.parse(result);
+			 			build_accepted_values(result);
+			 			$('#save-settings').html('UPDATE');
+	 				}
+
+      	}
 	 		});
 	 	}
 
@@ -65,8 +69,11 @@
 	 			document.close();
 
 	 			$('[name="input-para"]').val('');
-	 			result = JSON.parse(result);
-	 			build_accepted_values(result);
+	 			if (result !="") {
+			 			result = JSON.parse(result);
+			 			build_accepted_values(result);
+			 			$('#save-settings').html('UPDATE');
+	 				}
       	}
 	 		});
 	 	});
@@ -103,7 +110,10 @@
 	 			document.close();
 	 			result = JSON.parse(result);
 	 			build_accepted_values(result);
-      				}
+	 			if (result =="") {
+	 				$('#save-settings').html('SAVE');
+	 			}
+      	}
 	 		});
 	 }
 

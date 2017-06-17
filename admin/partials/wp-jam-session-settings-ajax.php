@@ -16,11 +16,16 @@ require( $file_path . 'wp-load.php' );
 global $wpdb;
 
 $url_para = (!isset($_POST['url-para'])) ? '': sanitize_text_field($_POST['url-para']);
+$url_para = str_replace(" ","",$url_para);
 $input_para = (!isset($_POST['input-para'])) ? '': sanitize_text_field($_POST['input-para']);
+$input_para = str_replace(" ","",$input_para);
 $type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
 $field_id = (!isset($_POST['field-id'])) ? '': sanitize_text_field($_POST['field-id']);
+$field_id = str_replace(" ","",$field_id);
 $WC_id = (!isset($_POST['WC-id'])) ? '': sanitize_text_field($_POST['WC-id']);
+$WC_id = str_replace(" ","",$WC_id);
 $term_time = (!isset($_POST['term-time'])) ? '': sanitize_text_field($_POST['term-time']);
+$term_time = str_replace(" ","",$term_time);
 
 // These are for checking the empty inputs
 (!isset($_POST['url-para'])) ? $_POST['url-para'] = '': sanitize_text_field($_POST['url-para']);
