@@ -25,47 +25,48 @@
     </div> <!-- end row -->
     <div class="row">
       <div class="col-xs-12 form-area">
-        <form id="settings-form">
+        <form id="settings-form" action="<?php echo plugin_dir_url( __FILE__ ) . 'wp-jam-session-settings-ajax.php'; ?>">
           <div class="col-xs-5">
             <div class="form-group">
               <label for="url-para">URL Parameter: </label>
               <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="url-para" class="form-control" id="url-para">
+              <input type="text" name="url-para" class="form-control" id="url-para" value="<?php echo get_option('wp-jam-session-url-para') ?>">
             </div>
             <div class="form-group">
               <label for="type-form">Type of Form: </label>
               <p>example: Select form plugin <span data-toggle="tooltip" data-placement="top" title="Please select the type of form that you are using." class="help-badge"><strong>?</strong></span></p>
-              <select type="select" name="type-form" class="form-control" id="type-form">
-                <option>WooCommerce</option>
-                <option>Contact Forms 7</option>
-                <option>Ninja Forms</option>
-                <option>Gravity Forms</option>
+              <select type="select" name="type-form" class="form-control" id="type-form" value="<?php echo get_option('wp-jam-session-type-form') ?>">
+                <option value="" disabled selected>Select your option</option>
+                <option value="WooCommerce">WooCommerce</option>
+                <option value="Contact Forms 7">Contact Forms 7</option>
+                <option value="Ninja Forms">Ninja Forms</option>
+                <option value="Gravity Forms">Gravity Forms</option>
               </select>
             </div>
             <div class="form-group">
               <label for="field-id">Input Field ID: </label>
               <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="field-id" class="form-control" id="field-id">
+              <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>">
             </div>
           </div> <!-- end first col -->
           <div class="col-xs-5">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="input-para" class="form-control" id="input-para">
+              <input type="text" name="input-para" class="form-control" id="input-para" value="">
             </div>
             <div class="form-group">
               <label for="WC-id">If WC form ID: </label>
               <p>example: Form ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="If using Woocommerce form then place form ID here." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="WC-id" class="form-control" id="WC-id">
+              <input type="text" name="WC-id" class="form-control" id="WC-id" value="<?php echo get_option('wp-jam-session-WC-id') ?>">
             </div>
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
-              <input type="number" name="term-time" class="col-xs-3 form-control" id="term-time">
+              <input type="text" name="term-time" class="col-xs-3 form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>">
             </div>
           </div> <!-- end second col -->
-          <div class="col-xs-2 text-center">
+          <div class="col-xs-2">
           <?php 
           /**
           *

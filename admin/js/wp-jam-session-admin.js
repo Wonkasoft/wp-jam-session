@@ -31,6 +31,27 @@
 
 	 $( document ).ready(function() {
 	 	$('[data-toggle="tooltip"]').tooltip();
+	 	
+	 	$('.list-group-item').mouseover(function() {
+	 		$('.list-group-item').addClass('active');
+	 	});
+
+	 	get_accepted_values();
+	 	function get_accepted_values() {
+	 		$.ajax({
+	 			type: "POST",
+	 			dataType: "text",
+	 			url: $('#settings-form').attr('action'),
+	 			data: {'sendvalues':'sent'},
+	 			success: function(result) {
+	 			document.close();
+	 			result = JSON.parse(result);
+	 			console.log(result);
+	 			build_accepted_values(result);
+      	}
+	 		});
+	 	}
+
 
 	 	// Tigger a click event for to save settings
 	 	// ajax call for all form data to be stored
@@ -38,15 +59,29 @@
 	 	$('#save-settings').click( function(event) {
 	 		event.preventDefault();
 	 		$.ajax({
-	 			url: '../wp-content/plugins/wp-jam-session/admin/partials/wp-jam-session-settings-ajax.php',
-	 			data: $('#settings-form').serialize(),
 	 			type: "POST",
 	 			dataType: "text",
+	 			url: $('#settings-form').attr('action'),
+	 			data: $('#settings-form').serialize(),
 	 			success: function(result) {
+	 			document.close();
 	 			console.log(result);
+	 			result = JSON.parse(result);
+	 			build_accepted_values(result);
       	}
+
 	 		});
 	 	});
 	 });
+	 
+	 function build_accepted_values(values) {
+// 	 	for (var i = 0; i < values.length; i++) {
+// 		$('#accepted-values').append('<li class="list-group-item">' + values[i] + '</li>');
+// }
+		$.each(values, function (i, val) {
+       $('#accepted-values').append('<li class="list-group-item">' + val + '</li>');
+    });
+
+	 }
 
 })( jQuery );
