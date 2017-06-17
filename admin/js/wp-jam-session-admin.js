@@ -32,8 +32,10 @@
 	 $( document ).ready(function() {
 	 	$('[data-toggle="tooltip"]').tooltip();
 
-	 	// Get accepted values on load
-	 	get_accepted_values();
+	 	if ($('#accepted-values').length > 0) {
+		 	// Get accepted values on load
+		 	get_accepted_values();	
+	 	}
 	 	function get_accepted_values() {
 	 		$.ajax({
 	 			type: "POST",
@@ -41,7 +43,6 @@
 	 			url: $('#settings-form').attr('action'),
 	 			data: {'sendvalues':'sent'},
 	 			success: function(result) {
-	 			document.close();
 	 			result = JSON.parse(result);
 	 			build_accepted_values(result);
       				}
