@@ -107,8 +107,8 @@ class Wp_Jam_Session_Admin {
 		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
 		 	// enqueue bootstrap js
 			wp_enqueue_script( $bootstrapjs, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', false );
-		 } 
-	
+		} 
+
 	}
 
 // Create Admin / Settings page
@@ -131,61 +131,64 @@ class Wp_Jam_Session_Admin {
 	public function add_action_links() {
 		$base =  'wp-jam-session/wp-jam-session.php';
 		add_filter('plugin_action_links_'. $base, 'add_settings_link');
-  	
-  	function add_settings_link($links) { 
-	    $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
-	    $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
-	    $donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
-	    array_unshift($links, $settings_link, $support_link, $donate_link); 
-	    return $links; 
-  	}
+
+		function add_settings_link($links) { 
+			$settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
+			$support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
+			$donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
+			array_unshift($links, $settings_link, $support_link, $donate_link); 
+			return $links; 
+		}
 	}
 
 	public function start_session() {
 		add_action('init', 'register_my_session', 1);
 		// Setup session
 		function register_my_session() {
-		  if( !session_id() )
-		  {
-		    session_start();
-		  }
+			if( !session_id() )
+			{
+				session_start();
+			}
 		}
 
 		add_action('wp_logout', 'myEndSession');
-		add_action('wp_login', 'myEndSession');
 		// End session
 		function myEndSession() {
-		  session_destroy ();
+			session_destroy ();
 		}
 
 		add_action('wp_head', 'header_config');
 
-		// Set session variable for rep number and discount number
 		// Validate by parameter
-		// If repnum is not set then the user will be redirected to the 404 page
 		function header_config() {
-		// Validation by repnum
-		// if valid then set session variable for repnum
-		  if (!$_SESSION['repnum'] && $_GET['repnum'] != '') {
-		    $_SESSION['repnum'] = $_GET['repnum'];
-		  } elseif ($_SESSION['repnum'] == '' && $_GET['repnum'] =='') {
-		          status_header( 404 );
-		          nocache_headers();
-		          include( get_query_template( '404' ) );
-		          die();
-		    }
-		// If new parameter sent update session variable for repnum
-		  if ($_SESSION['repnum'] != $_GET['repnum'] && $_GET['repnum'] != '') {
-		    $_SESSION['repnum'] = $_GET['repnum'];
-		  }
-		// Set discount variable by parameter
-		  if (!$_SESSION['discount'] && $_GET['discount']!=''){
-		    $_SESSION['discount'] = $_GET['discount'];
-		  }
-		// If new parameter sent update session variable for discount
-		  if ($_SESSION['discount'] != $_GET['discount'] && $_GET['discount'] != '') {
-		    $_SESSION['discount'] = $_GET['discount'];
-		  }
+		// Validation by value
+		// if valid then set session variable for value
+			$set_parmeter = get_option('wp-jam-session-url-para');
+			$allowed_value = get_option('wp-jam-session-input-para');
+			// Check for empty session then vailidate value then set the session variable
+			if (!$_SESSION[$set_parmeter] && $_GET[$set_parmeter] != '' && in_array($_GET[$set_parmeter], $allowed_value)) {
+				// Set the session variable
+				$_SESSION[$set_parmeter] = sanitize_text_field($_GET[$set_parmeter]);
+			} elseif (!$_SESSION[$set_parmeter] && $_GET[$set_parmeter] =='') {
+		          
+		          // session_destroy ();
+		          // status_header( 404 );
+		          // nocache_headers();
+		          // include( get_query_template( '404' ) );
+		          // die();
+			}
+
+// If new parameter is set then update session variable 
+			if ($_SESSION[$set_parmeter] != $_GET[$set_parmeter] && $_GET[$set_parmeter] != '') {
+				$_SESSION[$set_parmeter] = sanitize_text_field($_GET[$set_parmeter]);
+				if (!in_array($_SESSION[$set_parmeter], $allowed_value)) {
+      // session_destroy();
+      // status_header( 401 );
+      // nocache_headers();
+      // include( get_query_template( 'norep' ) );
+      // die();
+				}
+			} 
 		}
 	}
 }
