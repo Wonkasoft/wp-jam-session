@@ -34,7 +34,7 @@
 
 	 	// Get accepted values on load
 	 	get_accepted_values();
-
+	 	
 	 	function get_accepted_values() {
 	 		$.ajax({
 	 			type: "POST",
@@ -68,8 +68,6 @@
 	 			build_accepted_values(result);
       	}
 	 		});
-
-	 		$(this).val()='';
 	 	});
 	 });
 	 
