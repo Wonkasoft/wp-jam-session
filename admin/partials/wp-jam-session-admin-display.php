@@ -97,7 +97,7 @@
         </div> <!-- end row -->
         <div class="row">
           <div class="col-xs-12 text-center donate-btn">
-            <button class="btn jam-btn">DONATE</button>
+            <a href="https://paypal.me/Wonkasoft" target="_blank"><button class="btn jam-btn">DONATE</button></a>
           </div> <!-- end col -->
         </div> <!-- end row -->
       </div> <!-- end col -->

@@ -158,6 +158,7 @@ class Wp_Jam_Session {
 
 		$plugin_admin = new Wp_Jam_Session_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'display_admin_page' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'addActionLinks' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

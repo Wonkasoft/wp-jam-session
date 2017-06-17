@@ -74,14 +74,6 @@ function run_wp_jam_session() {
 }
 run_wp_jam_session();
 
-add_filter("plugin_action_links_" . plugin_basename(__FILE__), 'add_settings_link' );
-  function add_settings_link($links) { 
-    $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
-    $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
-    $donate_link = '<a href="https://wonkasoft.com/wp-jam-session/donate" target="blank">Donate</a>';
-    array_unshift($links, $settings_link, $support_link, $donate_link); 
-    return $links; 
-  }
 
 // add_action('init', 'register_my_session', 1);
 // add_action('wp_logout', 'myEndSession');
