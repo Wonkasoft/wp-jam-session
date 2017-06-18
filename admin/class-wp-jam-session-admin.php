@@ -119,7 +119,7 @@ class Wp_Jam_Session_Admin {
 			'manage_options',
 			'wp-jam-session-settings',
 			array($this,'show_settings_page'),
-			plugins_url("/img/Jam-Session-Box-Logo.svg", __FILE__),
+			plugins_url("/img/jam-session-box-logo.svg", __FILE__),
 			'8.0'
 			);
 	}
