@@ -15,7 +15,7 @@
 <div id="settings-tab" class="tab-pane fade in active">
   <div class="row">
     <div class="col-xs-2">
-      <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url('/wp-jam-session/admin/img/Jam-session-Logo.png'); ?>" />
+      <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url('/wp-jam-session/admin/img/jam-session-logo.png'); ?>" />
     </div>
     <div class="col-xs-8">
       <h1>JAM SESSION</h1>
@@ -90,14 +90,14 @@
             <div class="form-group">
               <label for="field-id">Input Field ID: </label>
               <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>" maxlength="10">
+              <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>" maxlength="25">
             </div>
           </div> <!-- end first col -->
           <div class="col-xs-5">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="10">
+              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="19">
             </div>
             <div class="form-group">
               <label for="WC-id">If WC form ID: </label>
