@@ -28,7 +28,7 @@
         <form id="settings-form" action="<?php echo plugin_dir_url( __FILE__ ) . 'wp-jam-session-settings-ajax.php'; ?>">
           <div class="col-xs-5">
             <div class="form-group">
-              <label for="url-para">URL Parameter: </label>
+              <label for="url-para">Add URL Parameter: </label>
               <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="url-para" class="form-control" id="url-para" value="<?php echo get_option('wp-jam-session-url-para') ?>" maxlength="15">
             </div>
@@ -92,22 +92,35 @@
               <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>" maxlength="25">
             </div>
+            <div class="form-group">
+              <label for="field-id">URL for link creation: </label>
+              <p>example: URL that you want to send parameters to. <span data-toggle="tooltip" data-placement="top" title="Enter the URL that you want to place the parameters at the end of." class="help-badge"><strong>?</strong></span></p>
+              <input type="text" name="url-link" class="form-control" id="url-link" value="<?php echo get_option('wp-jam-session-url-link') ?>">
+            </div>
           </div> <!-- end first col -->
           <div class="col-xs-5">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="19">
+              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="12">
             </div>
             <div class="form-group">
-              <label for="WC-id">If WC form ID: </label>
+              <label for="WC-id">If WooCommerce then form ID: </label>
               <p>example: Form ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="If using Woocommerce form then place form ID here." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="WC-id" class="form-control" id="WC-id" value="<?php echo get_option('wp-jam-session-WC-id') ?>" maxlength="10">
             </div>
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="term-time" class="col-xs-3 form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
+              <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
+            </div>
+            <div class="form-group">
+              <label for="created-url">Here is your new URL with parameters: </label>
+              <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
+              <div class="input-group">
+              <input name="created-url" id="created-url" class="form-control" value="" disabled><div class="input-group-btn copy-btn-div"><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
+              </div>
+              </div>
             </div>
           </div> <!-- end second col -->
           <div class="col-xs-2">

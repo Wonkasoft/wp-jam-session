@@ -42,7 +42,7 @@ span.help-badge {
 }
 
 #settings-form input#term-time {
-  width: 40px;
+  width: 60px;
 }
 
 #settings-wrapper .modal {
@@ -70,6 +70,16 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
   background: linear-gradient(-214deg, rgba(#0086aa, 0.8) 0%, rgba(#63fcff, 1) 100%);
 }
 
-.value-badge {
+.removal-btn {
   cursor: pointer;
+  position: relative;
+  z-index: 50;
+}
+
+li.list-group-item {
+  overflow: hidden;
+}
+
+.copy-btn-div button {
+  font-size: 20px
 }

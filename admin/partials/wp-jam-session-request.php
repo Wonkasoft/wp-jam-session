@@ -23,6 +23,7 @@
     $js_validate = (!isset($_POST['js-validate'])) ? "": intval($_POST['js-validate']);
     $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']);
     $email = (!isset($_POST['email'])) ? "": sanitize_email($_POST['email']);
+    $news_letter = (!isset($_POST['newsletter'])) ? "": sanitize_email($_POST['newsletter']);
     $message = (!isset($_POST['message'])) ? "": sanitize_textarea_field($_POST['message']);
     $human = (!isset($_POST['human'])) ? "": intval($_POST['human']);
     if (isset($_POST['submit'])) {
@@ -30,7 +31,7 @@
       $to = 'support@wonkasoft.com'; 
       $subject = 'Message from Jam Session request form';
 
-      $body = "From: $name\n E-Mail: $email\n Message:\n $message";
+      $body = "From: $name\n E-Mail: $email\n Newsletter: $news_letter\n Message:\n $message";
       if (!$_POST['name']) {
         $errName = 'Please enter your name';
       }
@@ -60,7 +61,7 @@
         <h4 class="modal-title">Got an Idea?</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form" method="post">
+        <form id="modal-form" class="form-horizontal" role="form" method="post">
           <div class="form-group">
             <div class="col-xs-12">
               <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']); echo $name; ?>">
@@ -81,8 +82,13 @@
           <div class="form-group">
             <div class="col-xs-12">
               <input type="hidden" class="form-control" id="js-validate" name="js-validate" value="<?php echo $js_validation; ?>">
-              <input type="text" class="form-control" id="human" name="human" placeholder="<?php echo $first_num . ' + ' . $second_num . ' = ?'; ?>" value="<?php $human = (!isset($_POST['human'])) ? "": sanitize_text_field($_POST['human']); echo $human; ?>">
+              <input type="text" class="form-control" id="human" name="human" placeholder="<?php echo $first_num . ' + ' . $second_num . ' = ? This a human check'; ?>" value="<?php $human = (!isset($_POST['human'])) ? "": sanitize_text_field($_POST['human']); echo $human; ?>">
               <?php echo "<p class='text-danger'>$errHuman</p>";?>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <label class="checkbox-inline"><input type="checkbox" name="newsletter" value="" checked="checked">Would you like to be added to our monthly newsletter?</label>
             </div>
           </div>
           <div class="form-group">
