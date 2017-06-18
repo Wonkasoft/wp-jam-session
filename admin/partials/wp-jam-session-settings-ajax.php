@@ -90,7 +90,8 @@ if ( !empty($_POST['url-link']) ) {
 
 if ( !empty($_POST['input-para']) ) {
     $input_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
-    $cleaning_array = explode(",", $input_para);
+    $input_para = str_replace(",", " ", $input_para);
+    $cleaning_array = explode(" ", $input_para);
     foreach ($cleaning_array as $value) {
       array_push($input_array, $value);
     }

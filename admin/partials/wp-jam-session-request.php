@@ -58,7 +58,7 @@
     <div class="modal-content">
       <div class="modal-header text-center">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Got an Idea?</h4>
+        <h4 class="modal-title">Got an Idea? <span class="glyphicon glyphicon-send"></span></h4>
       </div>
       <div class="modal-body">
         <form id="modal-form" class="form-horizontal" role="form" method="post">

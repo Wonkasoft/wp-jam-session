@@ -1,7 +1,30 @@
 /**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+* All of the CSS for your admin-specific functionality should be
+* included in this file.
+*/
+/**
+*
+* Media Queries 
+* @media (min-width: $iphone-4-min) and ( max-width: $iphone-4-max) and ( -webkit-device-pixel-ratio: 2 )
+* @media (min-width: $screen-sm-min)
+* @media (min-width: $screen-md-min)
+* @media (min-width: $screen-lg-min)
+*/
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+// Defining values
+$screen-sm-min: 768px;
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-md-min: 992px;
+$screen-sm-max: ($screen-md-min - 1);
+$screen-lg-min: 1200px;
+$screen-md-max: ($screen-lg-min - 1);
+// For iphone 4
+$iphone-4-min: 320px;
+$iphone-4-max: 480px;
+
 button.jam-btn,
 input.jam-btn {
   transition: all 0.3s ease-in-out;
@@ -16,7 +39,11 @@ div.row {
 }
 
 #settings-wrapper div.ads-area{
-  border-left: 2px solid #ddd;
+  border-top: 2px solid #ddd;
+  @media (min-width: $screen-md-min) {
+    border-top: none;
+    border-left: 2px solid #ddd;
+  }
 }
 
 #settings-wrapper div.ads-area div.donate-btn {
@@ -78,8 +105,17 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
 
 li.list-group-item {
   overflow: hidden;
+  max-width: 114px;
 }
 
 .copy-btn-div button {
   font-size: 20px
+}
+
+div.value-containers {
+  max-width: 100%;
+}
+
+#created-url {
+  cursor: pointer;
 }

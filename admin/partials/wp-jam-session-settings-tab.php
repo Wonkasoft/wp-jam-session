@@ -93,10 +93,14 @@
               <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>">
             </div>
             <div class="form-group">
-              <label for="field-id">URL for link creation: </label>
-              <p>example: URL that you want to send parameters to. <span data-toggle="tooltip" data-placement="top" title="Enter the URL that you want to place the parameters at the end of." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="url-link" class="form-control" id="url-link" value="<?php echo get_option('wp-jam-session-url-link') ?>">
-            </div>
+              <label for="created-url">Here is your new URL with parameters: </label>
+              <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
+              <div class="input-group">
+              <input type="hidden" name="url-link" class="form-control" id="url-link" value="<?php echo get_site_url(); ?>">
+              <input name="created-url" id="created-url" class="form-control" value="" disabled><div class="input-group-btn copy-btn-div"><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
+              </div> <!-- end button wrap -->
+              </div> <!-- end input-group -->
+            </div> <!-- end form-group -->
           </div> <!-- end first col -->
           <div class="col-xs-5">
             <div class="form-group">
@@ -113,14 +117,6 @@
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
-            </div>
-            <div class="form-group">
-              <label for="created-url">Here is your new URL with parameters: </label>
-              <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
-              <div class="input-group">
-              <input name="created-url" id="created-url" class="form-control" value="" disabled><div class="input-group-btn copy-btn-div"><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
-              </div>
-              </div>
             </div>
           </div> <!-- end second col -->
           <div class="col-xs-2">
