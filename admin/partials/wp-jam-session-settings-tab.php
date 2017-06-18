@@ -112,7 +112,7 @@
             <div class="form-group">
               <label for="WC-id">If WooCommerce then form ID: </label>
               <p>example: Form ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="If using Woocommerce form then place form ID here." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="WC-id" class="form-control" id="WC-id" value="<?php echo get_option('wp-jam-session-WC-id') ?>" maxlength="10">
+              <input type="text" name="WC-id" class="form-control" id="WC-id" value="<?php echo get_option('wp-jam-session-WC-id') ?>" maxlength="30">
             </div>
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
