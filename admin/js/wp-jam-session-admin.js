@@ -91,7 +91,7 @@ $('div.value-containers').remove();
 
 // This builds the list of accepted values
 $.each(values, function (i, val) {
-  $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle removal-btn"></span></div>');
+  $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
 
 $('.list-group-item').hover( function() {
