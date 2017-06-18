@@ -108,6 +108,15 @@ li.list-group-item {
   max-width: 114px;
 }
 
+li.list-group-item:first-child {
+  border-top-right-radius: 0;
+}
+
+#accepted-values span.input-group-addon {
+  top: 0;
+  padding: 13px 12px;
+}
+
 .copy-btn-div button {
   font-size: 20px
 }

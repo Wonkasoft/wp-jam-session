@@ -97,7 +97,8 @@
               <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
               <div class="input-group">
               <input type="hidden" name="url-link" class="form-control" id="url-link" value="<?php echo get_site_url(); ?>">
-              <input name="created-url" id="created-url" class="form-control" value="" disabled><div class="input-group-btn copy-btn-div"><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
+              <div class="input-group-btn copy-btn-div">
+              <input name="created-url" id="created-url" class="form-control" value="" disabled><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
               </div> <!-- end button wrap -->
               </div> <!-- end input-group -->
             </div> <!-- end form-group -->

@@ -72,7 +72,7 @@ $('#save-settings').click( function(event) {
 $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
-$('#created-url').click( function () {
+$('.copy-btn-div').click( function () {
   copy_to_clipboard('#created-url');
 });
 });
