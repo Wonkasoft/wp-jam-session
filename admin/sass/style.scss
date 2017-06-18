@@ -98,6 +98,7 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
 }
 
 .removal-btn {
+  top: 0;
   cursor: pointer;
   position: relative;
   z-index: 50;
@@ -105,6 +106,7 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
 
 li.list-group-item {
   overflow: hidden;
+  text-overflow:ellipsis;
   max-width: 114px;
 }
 

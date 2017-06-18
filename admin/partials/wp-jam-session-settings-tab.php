@@ -106,7 +106,7 @@
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="12">
+              <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="80">
             </div>
             <div class="form-group">
               <label for="WC-id">If WooCommerce then form ID: </label>

@@ -16,9 +16,9 @@ require( $file_path . 'wp-load.php' );
 global $wpdb;
 
 $url_para = (!isset($_POST['url-para'])) ? '': sanitize_text_field($_POST['url-para']);
-$url_para = str_replace(" ","",$url_para);
+$url_para =  strtolower($url_para);
 $input_para = (!isset($_POST['input-para'])) ? '': sanitize_text_field($_POST['input-para']);
-$input_para = str_replace(" ","",$input_para);
+$input_para =  strtolower($input_para);
 $type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
 $url_link = (!isset($_POST['url-link'])) ? '': esc_url($_POST['url-link']);
 $field_id = (!isset($_POST['field-id'])) ? '': sanitize_text_field($_POST['field-id']);
