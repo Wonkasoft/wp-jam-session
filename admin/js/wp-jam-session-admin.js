@@ -70,8 +70,11 @@ $('#save-settings').click( function(event) {
   });
 });
 $('#copy-btn-id').click( function () {
-  copy_to_clipboard('#created-url')
-})
+  copy_to_clipboard('#created-url');
+});
+$('#created-url').click( function () {
+  copy_to_clipboard('#created-url');
+});
 });
 
 // For created url copy to clipboard
