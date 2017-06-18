@@ -107,8 +107,8 @@ class Wp_Jam_Session_Admin {
 		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
 		 	// enqueue bootstrap js
 			wp_enqueue_script( $bootstrapjs, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', false );
-		 } 
-	
+		} 
+
 	}
 
 // Create Admin / Settings page
@@ -131,13 +131,17 @@ class Wp_Jam_Session_Admin {
 	public function add_action_links() {
 		$base =  'wp-jam-session/wp-jam-session.php';
 		add_filter('plugin_action_links_'. $base, 'add_settings_link');
-  	
-  	function add_settings_link($links) { 
-	    $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
-	    $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
-	    $donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
-	    array_unshift($links, $settings_link, $support_link, $donate_link); 
-	    return $links; 
-  	}
+
+		function add_settings_link($links) { 
+			$settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
+			$support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
+			$donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
+			array_unshift($links, $settings_link, $support_link, $donate_link); 
+			return $links; 
+		}
+	}
+
+	public function start_session() {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
 }

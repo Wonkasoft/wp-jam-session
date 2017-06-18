@@ -12,7 +12,7 @@
  */
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<!-- This file should primarily consist of PHP with a little bit of HTML. -->
 <div id="settings-wrapper">
   <div class="container-fluid">
     <div class="row">
@@ -61,14 +61,14 @@
       </div> <!-- end row -->
       <div class="row">
         <div class="col-xs-12 text-center">
-          <a href="https://wonkasoft.com/clixplit" id="first-ad">
+          <a href="https://wonkasoft.com/clixplit" id="first-ad" target="blank">
             <img src="<?php echo plugins_url('/wp-jam-session/admin/img/clixplit-ad.jpg'); ?>" />
           </a>
         </div> <!-- end col -->
       </div> <!-- end row -->
       <div class="row">
         <div class="col-xs-12 text-center">
-          <a href="https://wonkasoft.com" id="second-ad">
+          <a href="https://wonkasoft.com" id="second-ad" target="blank">
             <img src="<?php echo plugins_url('/wp-jam-session/admin/img/wonkasoft-ad.jpg'); ?>" />
           </a>
         </div> <!-- end col -->
