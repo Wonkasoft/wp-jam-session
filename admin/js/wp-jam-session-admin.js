@@ -36,7 +36,7 @@ $( document ).ready(function() {
   if ($('#accepted-values').length > 0) {
   get_accepted_values();  
   }
-
+  
   function get_accepted_values() {
       var pluginTitle = $('.setting-area');
 	  $.ajax({
