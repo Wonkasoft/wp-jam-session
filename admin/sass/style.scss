@@ -26,7 +26,9 @@ $iphone-4-min: 320px;
 $iphone-4-max: 480px;
 
 button.jam-btn,
-input.jam-btn {
+input.jam-btn,
+div.setting-area,
+#message {
   transition: all 0.3s ease-in-out;
 }
 
@@ -52,6 +54,10 @@ div.row {
 
 #settings-tab {
   margin: 15px;
+}
+
+div.setting-area {
+  margin-top: 0;
 }
 
 #settings-wrapper div.setting-area div.form-area {
@@ -133,4 +139,6 @@ div.value-containers {
 
 #message {
   margin: 15px;
+  overflow: hidden;
+  display: none;
 }

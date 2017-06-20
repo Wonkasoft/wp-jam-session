@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 
 add_action('wp_ajax_save_values', 'wp_jam_ajax');
 function wp_jam_ajax() {
-  global $wpdb;
+global $wpdb;
 
 if (!check_ajax_referer( 'wp-jam-number', 'security')) {
   return wp_send_json_error('Invalid Nonce');
@@ -44,7 +44,7 @@ if ( !empty($_POST['remove-value']) ) {
     $input_array_remove = array_values($input_array_remove);
   }
   update_option( 'wp-jam-session-input-para', $input_array_remove, 'yes' );
-  $return = wp_send_json_success($input_array_remove);
+  $return = wp_send_json_success($input_array_remove) . 'for remove-value.';
   return $return;
 
 }
@@ -53,7 +53,7 @@ if ( !empty($_POST['remove-value']) ) {
 if ( !empty($_POST['current-value']) ) {
   update_option( 'wp-jam-session-current-value', $_POST['current-value'], 'yes' );
   $created_link = (!empty(get_option('wp-jam-session-url-link'))) ? get_option('wp-jam-session-url-link') . '?' . get_option('wp-jam-session-url-para') . '=' . get_option('wp-jam-session-current-value'): '';
-  $created_link = wp_send_json_success($created_link);
+  $created_link = wp_send_json_success($created_link) . 'for current-value.';
   return $created_link;
 }
 
@@ -119,4 +119,6 @@ $term_time = str_replace(" ","",$term_time);
 
     update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
   }
+
+  wp_die();
 }

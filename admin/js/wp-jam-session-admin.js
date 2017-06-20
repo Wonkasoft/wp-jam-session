@@ -71,7 +71,7 @@ $( document ).ready(function() {
 // in the options table
 $('#save-settings').click( function(event) {
   event.preventDefault();
-  var pluginTitle = $('.setting-area');
+  var postMessage = $('#message');
   var data_send = $('#settings-form').serializeArray();
   data_send.push({name: 'action', value: 'save_values'},{name: 'security', value: WP_JAM_KIT.security});
   data_send = $.param(data_send);
@@ -83,16 +83,14 @@ $('#save-settings').click( function(event) {
     success: function(result) {
       if (true === result.success) {
         $('[name="input-para"]').val('');
-        $('#message').remove();
-        pluginTitle.before('<div id="message" class="updated"><p>' + WP_JAM_KIT.success + '</p></div>');
-        $('#message').delay(2000).fadeToggle(2000);
+        postMessage.addClass('updated').html('<p>' + WP_JAM_KIT.success + '</p>');
+        $('#message').slideDown(2000);
         build_accepted_values(result.data);
       }
     },
     error: function(error) {
-      $('#message').remove();
-      pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-      $('#message').delay(2000).fadeToggle(2000);
+      postMessage.addClass('error').html('<p>' + WP_JAM_KIT.failure + '</p>');
+      $('#message').slideDown(2000);
     }
   });
 });
@@ -142,29 +140,28 @@ $('li.list-group-item').click( function () {
 
 // ajax call for deleting accepted values and calling current accepted value.
 function accepted_value(purpose, value) {
-  var pass_info = purpose + '=' + value;
-  var pluginTitle = $('.setting-area');
-  console.log(pass_info);
+  var pass_info = purpose + '=' + value + '&action=save_values&security=' + WP_JAM_KIT.security;
+  var postMessage = $('#message');
   $.ajax({
     type: "POST",
     dataType: "json",
     url: ajaxurl,
     data: pass_info,
     success: function(result) {
-      console.log(result);
       if (purpose == 'remove-value') {
+        $('#message').slideDown(5000);
+        postMessage.html('<p>' + value + ' has been removed.</p>');
         build_accepted_values(result.data);
         $('#created-url').val('');
       }
       if (purpose == 'current-value') {
-        console.log(result);
         $('#created-url').val(result.data);
       }
     },
     error: function(error) {
-      $('#message').remove();
-      pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-      $('#message').delay(2000).fadeToggle(2000);
+      console.log(error);
+      postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+      $('#message').slideDown(2000);
     }
   });
 }
