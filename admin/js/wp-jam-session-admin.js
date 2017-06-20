@@ -54,13 +54,13 @@ $( document ).ready(function() {
             } else {
              postMessage.addClass('error');
              postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-             $('#message').slideDown('slow');
+             $('#message').fadeIn();
            }
       },
      error: function(error) {
            postMessage.addClass('error');
            postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-           $('#message').slideDown('slow');
+           $('#message').fadeIn();
          }
 	  });
 	}
@@ -84,13 +84,13 @@ $('#save-settings').click( function(event) {
       if (true === result.success) {
         $('[name="input-para"]').val('');
         postMessage.addClass('updated').html('<p>' + WP_JAM_KIT.success + '</p>');
-        $('#message').slideDown(2000);
+        $('#message').fadeIn();
         build_accepted_values(result.data);
       }
     },
     error: function(error) {
       postMessage.addClass('error').html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').slideDown(2000);
+      $('#message').fadeIn();
     }
   });
 });
@@ -122,6 +122,8 @@ $.each(values, function (i, val) {
   $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
 
+$('#message').delay(2000).fadeOut();
+
 $('.list-group-item').hover( function() {
   $(this).toggleClass('active');
 });
@@ -150,7 +152,7 @@ function accepted_value(purpose, value) {
     success: function(result) {
       if (purpose == 'remove-value') {
        postMessage.addClass('updated');
-       $('#message').slideDown('slow');
+       $('#message').fadeIn();
        postMessage.html('<p>The accepted value ' + value + ' has been removed.</p>');
        build_accepted_values(result.data);
        $('#created-url').val('');
@@ -162,7 +164,7 @@ function accepted_value(purpose, value) {
     error: function(error) {
       console.log(error);
       postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').slideDown(2000);
+      $('#message').fadeIn();
     }
   });
 }
