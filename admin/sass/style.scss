@@ -32,6 +32,17 @@ div.setting-area,
   transition: all 0.3s ease-in-out;
 }
 
+span.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+    display: none;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
 div.row {
   margin-top: 15px;
 }
@@ -113,7 +124,6 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
 li.list-group-item {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 114px;
 }
 
 li.list-group-item:first-child {

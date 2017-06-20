@@ -38,7 +38,9 @@ $( document ).ready(function() {
   }
 
   function get_accepted_values() {
-      var pluginTitle = $('.setting-area');
+     var postMessage = $('#message');
+     var loading = $('#save-settings .glyphicon-refresh-animate');
+     loading.show();
 	  $.ajax({
 	    type: "POST",
 	    dataType: "json",
@@ -49,18 +51,20 @@ $( document ).ready(function() {
             security: WP_JAM_KIT.security
 	  },
 	    success: function(result) {
+          loading.hide();
             if (true === result.success) {
-	       build_accepted_values(result.data);
+	             build_accepted_values(result.data);
             } else {
-              $('#message').remove();
-              pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-              $('#message').delay(2000).fadeToggle(2000);
+              postMessage.addClass('error');
+              postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+              $('#message').slideDown('fast');
             }
       },
      error: function(error) {
-            $('#message').remove();
-            pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-            $('#message').delay(2000).fadeToggle(2000);
+          loading.hide();
+            postMessage.addClass('error');
+            postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+            $('#message').slideDown('fast');
           }
 	  });
 	}
@@ -71,6 +75,8 @@ $( document ).ready(function() {
 // in the options table
 $('#save-settings').click( function(event) {
   event.preventDefault();
+  var loading = $('#save-settings .glyphicon-refresh-animate');
+  loading.show();
   var postMessage = $('#message');
   var data_send = $('#settings-form').serializeArray();
   data_send.push({name: 'action', value: 'save_values'},{name: 'security', value: WP_JAM_KIT.security});
@@ -81,16 +87,20 @@ $('#save-settings').click( function(event) {
     url: ajaxurl,
     data: data_send,
     success: function(result) {
+      loading.hide();
       if (true === result.success) {
         $('[name="input-para"]').val('');
-        postMessage.addClass('updated').html('<p>' + WP_JAM_KIT.success + '</p>');
-        $('#message').slideDown(2000);
+        postMessage.addClass('updated');
+        postMessage.html('<p>' + WP_JAM_KIT.success + '</p>');
+        $('#message').slideDown('fast');
         build_accepted_values(result.data);
       }
     },
     error: function(error) {
-      postMessage.addClass('error').html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').slideDown(2000);
+      loading.hide();
+      postMessage.addClass('error');
+      postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+      $('#message').slideDown('fast');
     }
   });
 });
@@ -122,6 +132,8 @@ $.each(values, function (i, val) {
   $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
 
+$('#message').delay(5000).slideUp('slow');
+
 $('.list-group-item').hover( function() {
   $(this).toggleClass('active');
 });
@@ -142,15 +154,19 @@ $('li.list-group-item').click( function () {
 function accepted_value(purpose, value) {
   var pass_info = purpose + '=' + value + '&action=save_values&security=' + WP_JAM_KIT.security;
   var postMessage = $('#message');
+  var loading = $('#save-settings .glyphicon-refresh-animate');
+  loading.show();
   $.ajax({
     type: "POST",
     dataType: "json",
     url: ajaxurl,
     data: pass_info,
     success: function(result) {
+      loading.hide();
       if (purpose == 'remove-value') {
-        $('#message').slideDown(5000);
-        postMessage.html('<p>' + value + ' has been removed.</p>');
+        postMessage.addClass('updated');
+        $('#message').slideDown('fast');
+        postMessage.html('<p>The accepted value ' + value + ' has been removed.</p>');
         build_accepted_values(result.data);
         $('#created-url').val('');
       }
@@ -159,9 +175,10 @@ function accepted_value(purpose, value) {
       }
     },
     error: function(error) {
+      loading.hide();
       console.log(error);
       postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').slideDown(2000);
+      $('#message').slideDown('fast');
     }
   });
 }
