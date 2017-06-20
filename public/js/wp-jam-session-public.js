@@ -28,34 +28,34 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-$( document ).ready(function() {
-	function get_form_information_values() {
-      var pluginTitle = $('.setting-area');
-	  $.ajax({
-	    type: "POST",
-	    dataType: "json",
-	    url: ajaxurl,
-	    data: { 
-	     action: 'save_values',
-            sendvalues: 'get_form_data',
-            security: WP_JAM_KIT.security
-	  },
-	    success: function(result) {
-            if (true === result.success) {
-	       build_accepted_values(result.data);
-            } else {
-              $('#message').remove();
-              pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-              $('#message').delay(2000).fadeToggle(2000);
-            }
-      },
-     error: function(error) {
-            $('#message').remove();
-            pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-            $('#message').delay(2000).fadeToggle(2000);
-          }
-	  });
-	}
-});
+// $( document ).ready(function() {
+// 	function get_form_information_values() {
+//       var pluginTitle = $('.setting-area');
+// 	  $.ajax({
+// 	    type: "POST",
+// 	    dataType: "json",
+// 	    url: ajaxurl,
+// 	    data: { 
+// 	     action: 'save_values',
+//             sendvalues: 'get_form_data',
+//             security: WP_JAM_KIT.security
+// 	  },
+// 	    success: function(result) {
+//             if (true === result.success) {
+// 	       build_accepted_values(result.data);
+//             } else {
+//               $('#message').remove();
+//               pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+//               $('#message').delay(2000).fadeToggle(2000);
+//             }
+//       },
+//      error: function(error) {
+//             $('#message').remove();
+//             pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+//             $('#message').delay(2000).fadeToggle(2000);
+//           }
+// 	  });
+// 	}
+// });
 
 })( jQuery );

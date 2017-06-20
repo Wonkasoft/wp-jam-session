@@ -36,9 +36,9 @@ $( document ).ready(function() {
   if ($('#accepted-values').length > 0) {
   get_accepted_values();  
   }
-  
+
   function get_accepted_values() {
-      var pluginTitle = $('.setting-area');
+      var postMessage = $('#message');
 	  $.ajax({
 	    type: "POST",
 	    dataType: "json",
@@ -52,16 +52,16 @@ $( document ).ready(function() {
             if (true === result.success) {
 	       build_accepted_values(result.data);
             } else {
-              $('#message').remove();
-              pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-              $('#message').delay(2000).fadeToggle(2000);
-            }
+             postMessage.addClass('error');
+             postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+             $('#message').slideDown('slow');
+           }
       },
      error: function(error) {
-            $('#message').remove();
-            pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
-            $('#message').delay(2000).fadeToggle(2000);
-          }
+           postMessage.addClass('error');
+           postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+           $('#message').slideDown('slow');
+         }
 	  });
 	}
 
@@ -149,11 +149,12 @@ function accepted_value(purpose, value) {
     data: pass_info,
     success: function(result) {
       if (purpose == 'remove-value') {
-        $('#message').slideDown(5000);
-        postMessage.html('<p>' + value + ' has been removed.</p>');
-        build_accepted_values(result.data);
-        $('#created-url').val('');
-      }
+       postMessage.addClass('updated');
+       $('#message').slideDown('slow');
+       postMessage.html('<p>The accepted value ' + value + ' has been removed.</p>');
+       build_accepted_values(result.data);
+       $('#created-url').val('');
+     }
       if (purpose == 'current-value') {
         $('#created-url').val(result.data);
       }

@@ -100,7 +100,7 @@ class Wp_Jam_Session_Public {
 
 	}
 
-	public function load_form() {
+	public function wp_jam_session_form_loader() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-public-display.php';
 	}
 
