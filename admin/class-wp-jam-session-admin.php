@@ -101,7 +101,13 @@ class Wp_Jam_Session_Admin {
 		 */
 		
 		// Check to see if bootstrap js is already enqueue before setting the enqueue
-		wp_enqueue_script( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-admin-js', str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
+
+		wp_localize_script($this->plugin_name . '-admin-js', 'WP_JAM_KIT', array(
+			'security' => wp_create_nonce( 'wp-jam-number' ),
+			'success' => 'Your options were successfully updated.',
+			'failure' => 'There was an error updating your options.'
+			));
 
 		$bootstrapjs = 'bootstrap-js';
 		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
@@ -144,4 +150,6 @@ class Wp_Jam_Session_Admin {
 	public function start_session() {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
+
+	
 }

@@ -1,5 +1,5 @@
 (function( $ ) {
-  'use strict';
+ 'use strict';
 
 /**
 * All of the code for your admin-facing JavaScript source
@@ -32,23 +32,38 @@
 $( document ).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
 
-  if ($('#accepted-values').length > 0) {
 // Get accepted values on load
-get_accepted_values();	
-}
+  if ($('#accepted-values').length > 0) {
+  get_accepted_values();  
+  }
 
-function get_accepted_values() {
-  $.ajax({
-    type: "POST",
-    dataType: "text",
-    url: $('#settings-form').attr('action'),
-    data: {'sendvalues':'sent'},
-    success: function(result) {
-      result = JSON.parse(result);
-      build_accepted_values(result);
-    }
-  });
-}
+  function get_accepted_values() {
+      var pluginTitle = $('.setting-area');
+	  $.ajax({
+	    type: "POST",
+	    dataType: "json",
+	    url: ajaxurl,
+	    data: { 
+	     action: 'save_values',
+            sendvalues: 'send',
+            security: WP_JAM_KIT.security
+	  },
+	    success: function(result) {
+            if (true === result.success) {
+	       build_accepted_values(result.data);
+            } else {
+              $('#message').remove();
+              pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+              $('#message').delay(2000).fadeToggle(2000);
+            }
+      },
+     error: function(error) {
+            $('#message').remove();
+            pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+            $('#message').delay(2000).fadeToggle(2000);
+          }
+	  });
+	}
 
 
 // Tigger a click event for to save settings
@@ -56,16 +71,28 @@ function get_accepted_values() {
 // in the options table
 $('#save-settings').click( function(event) {
   event.preventDefault();
+  var pluginTitle = $('.setting-area');
+  var data_send = $('#settings-form').serializeArray();
+  data_send.push({name: 'action', value: 'save_values'},{name: 'security', value: WP_JAM_KIT.security});
+  data_send = $.param(data_send);
   $.ajax({
     type: "POST",
-    dataType: "text",
-    url: $('#settings-form').attr('action'),
-    data: $('#settings-form').serialize(),
+    dataType: "json",
+    url: ajaxurl,
+    data: data_send,
     success: function(result) {
-
-      $('[name="input-para"]').val('');
-      result = JSON.parse(result);
-      build_accepted_values(result);
+      if (true === result.success) {
+        $('[name="input-para"]').val('');
+        $('#message').remove();
+        pluginTitle.before('<div id="message" class="updated"><p>' + WP_JAM_KIT.success + '</p></div>');
+        $('#message').delay(2000).fadeToggle(2000);
+        build_accepted_values(result.data);
+      }
+    },
+    error: function(error) {
+      $('#message').remove();
+      pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+      $('#message').delay(2000).fadeToggle(2000);
     }
   });
 });
@@ -113,23 +140,31 @@ $('li.list-group-item').click( function () {
 
 }
 
+// ajax call for deleting accepted values and calling current accepted value.
 function accepted_value(purpose, value) {
   var pass_info = purpose + '=' + value;
+  var pluginTitle = $('.setting-area');
+  console.log(pass_info);
   $.ajax({
     type: "POST",
-    dataType: "text",
-    url: $('#settings-form').attr('action'),
+    dataType: "json",
+    url: ajaxurl,
     data: pass_info,
     success: function(result) {
       console.log(result);
       if (purpose == 'remove-value') {
-        result = JSON.parse(result);
-        build_accepted_values(result);
+        build_accepted_values(result.data);
         $('#created-url').val('');
       }
       if (purpose == 'current-value') {
-        $('#created-url').val(result);
+        console.log(result);
+        $('#created-url').val(result.data);
       }
+    },
+    error: function(error) {
+      $('#message').remove();
+      pluginTitle.before('<div id="message" class="error"><p>' + WP_JAM_KIT.failure + '</p></div>');
+      $('#message').delay(2000).fadeToggle(2000);
     }
   });
 }

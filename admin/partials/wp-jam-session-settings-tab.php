@@ -13,14 +13,14 @@
 ?>
 
 <div id="settings-tab" class="tab-pane fade in active">
-  <div class="row">
+  <div class="row title-row">
     <div class="col-xs-2">
       <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url('/wp-jam-session/admin/img/jam-session-logo.png'); ?>" />
     </div>
     <div class="col-xs-8">
-      <h1>JAM SESSION</h1>
-      <h4>Welcome to Jam Session!<br />
-        With Jam Session you can setup links with customized parameters that will automatically place the customized parameters into a form for the user.</h4>
+      <h1>WP JAM SESSION</h1>
+      <h4>Welcome to  WP Jam Session!<br />
+        With WP Jam Session you can setup links with customized parameters that will automatically place the customized parameters into a form for the user.</h4>
       </div>
     </div> <!-- end row -->
     <div class="row">
