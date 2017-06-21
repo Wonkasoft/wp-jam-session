@@ -92,20 +92,20 @@ function copy_to_clipboard(element) {
             }
             if (action == 'save_settings') {
               if ((true === result.success) && (result.data !== '')) {
-                postMessage.toggleClass('updated');
+                postMessage.addClass('updated');
                 postMessage.html('<p>' + WP_JAM_KIT.success + '</p>');
                 $('#message>p').delay(5000).slideUp(500);
                 $('#message>p').queue( function() {
-                  $('#message').toggleClass('updated').dequeue();
+                  $('#message').removeClass('updated').dequeue();
                 });
                 $('#created-url').val('');
                  build_accepted_values(result.data);
               } else {
-                postMessage.toggleClass('error');
+                postMessage.addClass('error');
                 postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
                 $('#message>p').delay(5000).slideUp(500);
                 $('#message>p').queue( function() {
-                  $('#message').toggleClass('error').dequeue();
+                  $('#message').removeClass('error').dequeue();
                 });
               }
               }
@@ -113,22 +113,22 @@ function copy_to_clipboard(element) {
               if ((true === result.success) && (result.data !== '')) {
                 build_accepted_values(result.data);
               } else {
-                postMessage.toggleClass('error');
+                postMessage.addClass('error');
                 postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
                 $('#message>p').delay(5000).slideUp(500);
                 $('#message>p').queue( function() {
-                  $('#message').toggleClass('error').dequeue();
+                  $('#message').removeClass('error').dequeue();
                 });
               }
               }
             loading.hide();
       },
      error: function(error) {
-            postMessage.toggleClass('error');
+            postMessage.addClass('error');
             postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
             $('#message>p').delay(5000).slideUp(500);
             $('#message>p').queue( function() {
-              $('#message').toggleClass('error').dequeue();
+              $('#message').removeClass('error').dequeue();
             });
           loading.hide();
           }
