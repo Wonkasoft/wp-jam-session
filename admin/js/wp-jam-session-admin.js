@@ -46,13 +46,17 @@ $('#save-settings').click( function(event) {
   database_api('save_settings', data_send, WP_JAM_KIT.security);
 });
 
+ // This calls the copy to clipboard function when the clipboard button is clicked.
 $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
+
+ // This calls the copy to clipboard function when the link is clicked.
 $('.copy-btn-div').click( function () {
   copy_to_clipboard('#created-url');
 });
-});
+
+}); // End of $(document).ready();
 
 // For created url copy to clipboard
 function copy_to_clipboard(element) {
@@ -73,13 +77,19 @@ function copy_to_clipboard(element) {
       data: data,
       security: security
     };
+
+    // this is the ajax post.
     $.ajax({
       type: "POST",
       dataType: "json",
       url: ajaxurl,
       data: data_to_send,
       success: function(result) {
+
+            // this is for clearing the inputs form.
             $('[name="input-para"]').val('');
+
+            // This section is run when a value item is removed.
             if (action == 'remove_value_item') {
               postMessage.addClass('updated');
               postMessage.html('<p>The accepted value ' + data + ' has been removed.</p>');
@@ -90,6 +100,8 @@ function copy_to_clipboard(element) {
               });
               $('#created-url').val('');
             }
+
+            // This section is run when the settings are save by clicking the save button.
             if (action == 'save_settings') {
               if ((true === result.success) && (result.data !== '')) {
                 postMessage.addClass('updated');
@@ -109,6 +121,8 @@ function copy_to_clipboard(element) {
                 });
               }
               }
+
+              // This section is run when the list is first being built on the settings page.
               if (action == 'build_values_list') {
               if ((true === result.success) && (result.data !== '')) {
                 build_accepted_values(result.data);
@@ -123,6 +137,7 @@ function copy_to_clipboard(element) {
               }
             loading.hide();
       },
+      // this section is run when the ajax post comes back with an error.
      error: function(error) {
             postMessage.addClass('error');
             postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
@@ -145,8 +160,6 @@ $('div.value-containers').remove();
 $.each(values, function (i, val) {
   $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
-
-$('#message').delay(2000).fadeOut();
 
 $('.list-group-item').hover( function() {
   $(this).toggleClass('active');
