@@ -5,23 +5,6 @@
 * All of the code for your admin-facing JavaScript source
 * should reside in this file.
 *
-* Note: It has been assumed you will write jQuery code here, so the
-* $ function reference has been prepared for usage within the scope
-* of this function.
-*
-* This enables you to define handlers, for when the DOM is ready:
-*
-* $(function() {
-*
-* });
-*
-* When the window is loaded:
-*
-* $( window ).load(function() {
-*
-* });
-*
-* ...and/or other possibilities.
 *
 * Ideally, it is not considered best practise to attach more than a
 * single DOM-ready or window-load handler for a particular page.
@@ -33,15 +16,9 @@ $( document ).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
 
 // Get accepted values on load
-  if ($('#accepted-values').length > 0) {
+if ($('#accepted-values').length > 0) {
   database_api( 'build_values_list', 'getvalues',WP_JAM_KIT.security);  
-  }
-
- form_selction();
- 
- $('#type-form').change( function () {
-  form_selction();
- }); 
+}
 
 // Tigger a click event for to save settings
 // ajax call for all form data to be stored
@@ -55,18 +32,29 @@ $('#save-settings').click( function(event) {
 });
 
  // This calls the copy to clipboard function when the clipboard button is clicked.
-$('#copy-btn-id').click( function () {
+ $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
 
  // This calls the copy to clipboard function when the link is clicked.
-$('.copy-btn-div').click( function () {
+ $('.copy-btn-div').click( function () {
   copy_to_clipboard('#created-url');
+});
+
+// Check for woocommerce form type on document ready
+check_for_woocommerce();
+
+// Check for woocommerce form type on form update
+$('#type-form').change(function() {
+  check_for_woocommerce();
 });
 
 }); // End of $(document).ready();
 
-function form_selction() {
+// Check for woocommerce form type
+// If woocommerce is selected enable woocommerce form type
+// If woocommerce is not selected disable woocommerce form type
+function check_for_woocommerce() {
   var type_form = $('#type-form').val();
   var wc_id = $('#WC-id');
   if ('WooCommerce' !== type_form) {
@@ -131,20 +119,6 @@ function copy_to_clipboard(element) {
                   $('#message').removeClass('updated').dequeue();
                 });
                 $('#created-url').val('');
-                 build_accepted_values(result.data);
-              } else {
-                postMessage.addClass('error');
-                postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-                $('#message>p').delay(5000).slideUp(500);
-                $('#message>p').queue( function() {
-                  $('#message').removeClass('error').dequeue();
-                });
-              }
-              }
-
-              // This section is run when the list is first being built on the settings page.
-              if (action == 'build_values_list') {
-              if ((true === result.success) && (result.data !== '')) {
                 build_accepted_values(result.data);
               } else {
                 postMessage.addClass('error');
@@ -154,19 +128,33 @@ function copy_to_clipboard(element) {
                   $('#message').removeClass('error').dequeue();
                 });
               }
+            }
+
+              // This section is run when the list is first being built on the settings page.
+              if (action == 'build_values_list') {
+                if ((true === result.success) && (result.data !== '')) {
+                  build_accepted_values(result.data);
+                } else {
+                  postMessage.addClass('error');
+                  postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+                  $('#message>p').delay(5000).slideUp(500);
+                  $('#message>p').queue( function() {
+                    $('#message').removeClass('error').dequeue();
+                  });
+                }
               }
-            loading.hide();
-      },
+              loading.hide();
+            },
       // this section is run when the ajax post comes back with an error.
-     error: function(error) {
-            postMessage.addClass('error');
-            postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-            $('#message>p').delay(5000).slideUp(500);
-            $('#message>p').queue( function() {
-              $('#message').removeClass('error').dequeue();
-            });
-          loading.hide();
-          }
+      error: function(error) {
+        postMessage.addClass('error');
+        postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+        $('#message>p').delay(5000).slideUp(500);
+        $('#message>p').queue( function() {
+          $('#message').removeClass('error').dequeue();
+        });
+        loading.hide();
+      }
     });
   }
 
@@ -203,6 +191,5 @@ $('li.list-group-item').click( function () {
     $('#message').removeClass('updated').dequeue();
   });
 });
-
 }
 })( jQuery );

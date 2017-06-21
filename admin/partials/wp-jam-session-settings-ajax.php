@@ -75,7 +75,7 @@ foreach ($_POST['data'] as $key => $value) {
 
 // This is just for sanitizing all the data that was sent.
 $url_para = (!isset($_POST['url-para'])) ? '': sanitize_text_field($_POST['url-para']);
-$url_para =  strtolower($url_para);
+$url_para =  str_replace(' ', '', strtolower($url_para));
 $input_para = (!isset($_POST['input-para'])) ? '': sanitize_text_field($_POST['input-para']);
 $input_para =  strtolower($input_para);
 $type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
