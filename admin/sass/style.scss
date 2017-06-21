@@ -28,8 +28,20 @@ $iphone-4-max: 480px;
 button.jam-btn,
 input.jam-btn,
 div.setting-area,
-#message {
+#message,
+span.glyphicon,
+span.glyphicon-refresh-animate {
   transition: all 0.3s ease-in-out;
+}
+
+span.glyphicon-refresh-animate {
+    -webkit-animation: spin2 .7s infinite linear;
+    -animation: spin .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
 }
 
 div.row {
@@ -140,5 +152,5 @@ div.value-containers {
 #message {
   margin: 15px;
   overflow: hidden;
-  display: none;
+  height: 45px;
 }

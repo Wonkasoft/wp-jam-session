@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-xs-12 form-area">
         <form id="settings-form" action="<?php echo plugin_dir_url( __FILE__ ) . 'wp-jam-session-settings-ajax.php'; ?>">
-          <div class="col-xs-5">
+          <div class="col-xs-6 col-md-5">
             <div class="form-group">
               <label for="url-para">Add URL Parameter: </label>
               <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
@@ -103,16 +103,66 @@
               </div> <!-- end input-group -->
             </div> <!-- end form-group -->
           </div> <!-- end first col -->
-          <div class="col-xs-5">
+          <div class="col-xs-6 col-md-5">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="80">
             </div>
             <div class="form-group">
-              <label for="WC-id">If WooCommerce then form ID: </label>
+              <label for="WC-id">If WooCommerce then Select form: </label>
               <p>example: Form ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="If using Woocommerce form then place form ID here." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="WC-id" class="form-control" id="WC-id" value="<?php echo get_option('wp-jam-session-WC-id') ?>" maxlength="30">
+              <select type="select" name="WC-id" class="form-control" id="WC-id">
+              <?php  
+                $selected_option = get_option('wp-jam-session-WC-id');
+                switch ($selected_option) {
+                  case 'Billing': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="Billing" selected>Billing</option>
+                    <option value="Checkout">Checkout</option>
+                    <option value="Registration">Registration</option>
+                    <option value="Shipping">Shipping</option>
+                    <?php
+                    break;
+
+                    case 'Checkout': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="Billing">Billing</option>
+                    <option value="Checkout" selected>Checkout</option>
+                    <option value="Registration">Registration</option>
+                    <option value="Shipping">Shipping</option>
+                    <?php
+                    break;
+
+                    case 'Registration': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="Billing">Billing</option>
+                    <option value="Checkout">Checkout</option>
+                    <option value="Registration" selected>Registration</option>
+                    <option value="Shipping">Shipping</option>
+                    <?php
+                    break;
+
+                    case 'Shipping': ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="Billing">Billing</option>
+                    <option value="Checkout">Checkout</option>
+                    <option value="Registration">Registration</option>
+                    <option value="Shipping" selected>Shipping</option>
+                    <?php
+                    break;
+                  
+                  default: ?>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="Billing">Billing</option>
+                  <option value="Checkout">Checkout</option>
+                  <option value="Registration">Registration</option>
+                  <option value="Shipping">Shipping</option>
+                  <?php
+                    break;
+                }
+              ?>
+              </select>
             </div>
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
@@ -120,7 +170,7 @@
               <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
             </div>
           </div> <!-- end second col -->
-          <div class="col-xs-2">
+          <div class="col-xs-6 col-md-2">
           <?php 
           /**
           *
@@ -134,7 +184,7 @@
 
           </div>
           <div class="col-xs-12">
-            <button type="submit" id="save-settings" class="btn jam-btn pull-right">SAVE</button>
+            <button type="submit" id="save-settings" class="btn jam-btn pull-right">SAVE <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
           </div>
         </form>
         </div>

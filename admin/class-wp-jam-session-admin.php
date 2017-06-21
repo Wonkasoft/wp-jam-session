@@ -133,12 +133,12 @@ class Wp_Jam_Session_Admin {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 
-	public function add_action_links() {
-		require_once plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-build-action-links.php';
+	public function wp_jam_session_add_action_links() {
+		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-add-action-links.php';
 	}
 
 	public function start_session() {
-		require_once plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
+		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
 
 	

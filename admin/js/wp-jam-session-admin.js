@@ -34,66 +34,18 @@ $( document ).ready(function() {
 
 // Get accepted values on load
   if ($('#accepted-values').length > 0) {
-  get_accepted_values();  
+  database_api( 'build_values_list', 'getvalues',WP_JAM_KIT.security);  
   }
-
-  function get_accepted_values() {
-      var postMessage = $('#message');
-	  $.ajax({
-	    type: "POST",
-	    dataType: "json",
-	    url: ajaxurl,
-	    data: { 
-	     action: 'save_values',
-            sendvalues: 'send',
-            security: WP_JAM_KIT.security
-	  },
-	    success: function(result) {
-            if (true === result.success) {
-	       build_accepted_values(result.data);
-            } else {
-             postMessage.addClass('error');
-             postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-             $('#message').fadeIn();
-           }
-      },
-     error: function(error) {
-           postMessage.addClass('error');
-           postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-           $('#message').fadeIn();
-         }
-	  });
-	}
-
 
 // Tigger a click event for to save settings
 // ajax call for all form data to be stored
 // in the options table
 $('#save-settings').click( function(event) {
   event.preventDefault();
-  var postMessage = $('#message');
   var data_send = $('#settings-form').serializeArray();
-  data_send.push({name: 'action', value: 'save_values'},{name: 'security', value: WP_JAM_KIT.security});
-  data_send = $.param(data_send);
-  $.ajax({
-    type: "POST",
-    dataType: "json",
-    url: ajaxurl,
-    data: data_send,
-    success: function(result) {
-      if (true === result.success) {
-        $('[name="input-para"]').val('');
-        postMessage.addClass('updated').html('<p>' + WP_JAM_KIT.success + '</p>');
-        $('#message').fadeIn();
-        build_accepted_values(result.data);
-      }
-    },
-    error: function(error) {
-      postMessage.addClass('error').html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').fadeIn();
-    }
-  });
+  database_api('save_settings', data_send, WP_JAM_KIT.security);
 });
+
 $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
@@ -104,7 +56,6 @@ $('.copy-btn-div').click( function () {
 
 // For created url copy to clipboard
 function copy_to_clipboard(element) {
-  console.log(element);
   var $temp = $("<input>");
   $("body").append($temp);
   $temp.val($(element).val()).select();
@@ -112,6 +63,79 @@ function copy_to_clipboard(element) {
   $temp.remove();
 }
 
+// This is for sending data to update in the database or pull data from the database.
+  function database_api( action, data, security) {
+     var postMessage = $('#message');
+     var loading = $('#save-settings .glyphicon');
+     loading.show();
+     var data_to_send = { 
+      action: action, 
+      data: data,
+      security: security
+    };
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: ajaxurl,
+      data: data_to_send,
+      success: function(result) {
+            $('[name="input-para"]').val('');
+            if (action == 'remove_value_item') {
+              postMessage.addClass('updated');
+              postMessage.html('<p>The accepted value ' + data + ' has been removed.</p>');
+              build_accepted_values(result.data);
+              $('#message>p').delay(5000).slideUp(500);
+              $('#message>p').queue( function() {
+                $('#message').removeClass('updated').dequeue();
+              });
+              $('#created-url').val('');
+            }
+            if (action == 'save_settings') {
+              if ((true === result.success) && (result.data !== '')) {
+                postMessage.toggleClass('updated');
+                postMessage.html('<p>' + WP_JAM_KIT.success + '</p>');
+                $('#message>p').delay(5000).slideUp(500);
+                $('#message>p').queue( function() {
+                  $('#message').toggleClass('updated').dequeue();
+                });
+                $('#created-url').val('');
+                 build_accepted_values(result.data);
+              } else {
+                postMessage.toggleClass('error');
+                postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+                $('#message>p').delay(5000).slideUp(500);
+                $('#message>p').queue( function() {
+                  $('#message').toggleClass('error').dequeue();
+                });
+              }
+              }
+              if (action == 'build_values_list') {
+              if ((true === result.success) && (result.data !== '')) {
+                build_accepted_values(result.data);
+              } else {
+                postMessage.toggleClass('error');
+                postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+                $('#message>p').delay(5000).slideUp(500);
+                $('#message>p').queue( function() {
+                  $('#message').toggleClass('error').dequeue();
+                });
+              }
+              }
+            loading.hide();
+      },
+     error: function(error) {
+            postMessage.toggleClass('error');
+            postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+            $('#message>p').delay(5000).slideUp(500);
+            $('#message>p').queue( function() {
+              $('#message').toggleClass('error').dequeue();
+            });
+          loading.hide();
+          }
+    });
+  }
+
+// This is for parsing the accepted values list on the WP-Jam-Session settings page.
 function build_accepted_values(values) {
 
 // for refreshing all accepted values
@@ -130,43 +154,22 @@ $('.list-group-item').hover( function() {
 
 $('.removal-btn').click( function () {
   var value_id = $(this).parent('.value-containers').attr('id');
-  accepted_value('remove-value', value_id);
+  database_api('remove_value_item', value_id, WP_JAM_KIT.security);
 });
 
 $('li.list-group-item').click( function () {
   var current_id = $(this).parent('.value-containers').attr('id');
-  accepted_value('current-value', current_id);
+  var url_link = $('#url-link').val();
+  var url_para = $('#url-para').val();
+  $('#message').addClass('updated');
+  $('#message').html('<p>Your link has been created below with accepted value ' + current_id + '.</p>');
+  $('#created-url').val( url_link + '?' + url_para + '=' + current_id);
+
+  $('#message>p').delay(5000).slideUp(500);
+  $('#message>p').queue( function() {
+    $('#message').removeClass('updated').dequeue();
+  });
 });
 
 }
-
-// ajax call for deleting accepted values and calling current accepted value.
-function accepted_value(purpose, value) {
-  var pass_info = purpose + '=' + value + '&action=save_values&security=' + WP_JAM_KIT.security;
-  var postMessage = $('#message');
-  $.ajax({
-    type: "POST",
-    dataType: "json",
-    url: ajaxurl,
-    data: pass_info,
-    success: function(result) {
-      if (purpose == 'remove-value') {
-       postMessage.addClass('updated');
-       $('#message').fadeIn();
-       postMessage.html('<p>The accepted value ' + value + ' has been removed.</p>');
-       build_accepted_values(result.data);
-       $('#created-url').val('');
-     }
-      if (purpose == 'current-value') {
-        $('#created-url').val(result.data);
-      }
-    },
-    error: function(error) {
-      console.log(error);
-      postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-      $('#message').fadeIn();
-    }
-  });
-}
-
 })( jQuery );
