@@ -124,6 +124,16 @@ $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('
     update_option( 'wp-jam-session-url-link', $url_link, 'yes' );
   }
 
+  if ( !empty($_POST['WC-id']) ) {
+
+    update_option( 'wp-jam-session-WC-id', $WC_id, 'yes' );
+  }
+
+  if ( !empty($_POST['term-time']) ) {
+
+    update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
+  }
+  
   if ( !empty($_POST['input-para']) ) {
     $input_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
     $input_para = str_replace(",", " ", $input_para);
@@ -142,14 +152,5 @@ $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('
     wp_send_json_success($values_array);
   }
 
-  if ( !empty($_POST['WC-id']) ) {
-
-    update_option( 'wp-jam-session-WC-id', $WC_id, 'yes' );
-  }
-
-  if ( !empty($_POST['term-time']) ) {
-
-    update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
-  }
   wp_die();
 }
