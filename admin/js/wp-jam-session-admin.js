@@ -44,8 +44,8 @@ $('#save-settings').click( function(event) {
   event.preventDefault();
   var data_send = $('#settings-form').serializeArray();
   database_api('save_settings', data_send, WP_JAM_KIT.security);
-
 });
+
 $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
@@ -146,6 +146,8 @@ $.each(values, function (i, val) {
   $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
 
+$('#message').delay(2000).fadeOut();
+
 $('.list-group-item').hover( function() {
   $(this).toggleClass('active');
 });
@@ -170,5 +172,4 @@ $('li.list-group-item').click( function () {
 });
 
 }
-
 })( jQuery );

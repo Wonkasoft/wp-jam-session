@@ -138,7 +138,7 @@ class Wp_Jam_Session_Admin {
 	}
 
 	public function start_session() {
-		require_once plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
+		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
 
 	

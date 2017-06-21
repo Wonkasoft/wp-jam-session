@@ -118,7 +118,7 @@ class Wp_Jam_Session {
 		/**
 		 * The page responsible for handling settings data.
 		 */
-       	require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/wp-jam-session-settings-ajax.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/wp-jam-session-settings-ajax.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -175,7 +175,7 @@ class Wp_Jam_Session {
 	private function define_public_hooks() {
 
 		$plugin_public = new Wp_Jam_Session_Public( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'setup_session_info' );
+		$this->loader->add_action( 'wp_load', $plugin_public, 'wp_jam_session_form_loader' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
