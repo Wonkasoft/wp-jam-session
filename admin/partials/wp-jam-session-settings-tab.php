@@ -117,7 +117,7 @@
                 $selected_option = get_option('wp-jam-session-WC-id');
                 switch ($selected_option) {
                   case 'Billing': ?>
-                    <option value="" disabled>Select your option</option>
+                    <option value="none">Select your option</option>
                     <option value="Billing" selected>Billing</option>
                     <option value="Checkout">Checkout</option>
                     <option value="Registration">Registration</option>
@@ -126,7 +126,7 @@
                     break;
 
                     case 'Checkout': ?>
-                    <option value="" disabled>Select your option</option>
+                    <option value="none">Select your option</option>
                     <option value="Billing">Billing</option>
                     <option value="Checkout" selected>Checkout</option>
                     <option value="Registration">Registration</option>
@@ -135,7 +135,7 @@
                     break;
 
                     case 'Registration': ?>
-                    <option value="" disabled>Select your option</option>
+                    <option value="none">Select your option</option>
                     <option value="Billing">Billing</option>
                     <option value="Checkout">Checkout</option>
                     <option value="Registration" selected>Registration</option>
@@ -144,7 +144,7 @@
                     break;
 
                     case 'Shipping': ?>
-                    <option value="" disabled>Select your option</option>
+                    <option value="none">Select your option</option>
                     <option value="Billing">Billing</option>
                     <option value="Checkout">Checkout</option>
                     <option value="Registration">Registration</option>
@@ -153,7 +153,7 @@
                     break;
                   
                   default: ?>
-                  <option value="" disabled selected>Select your option</option>
+                  <option value="none" selected>Select your option</option>
                   <option value="Billing">Billing</option>
                   <option value="Checkout">Checkout</option>
                   <option value="Registration">Registration</option>

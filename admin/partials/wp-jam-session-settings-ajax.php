@@ -57,22 +57,6 @@ return wp_send_json_error('Invalid Nonce');
   wp_die();
 }
 
-// This is for creating the parameter link that is copied to clipboard by clicking the link on the settings page.
-add_action('wp_ajax_current_value', 'wp_jam_create_link');
-function wp_jam_create_link() {
-
-// Nonce checking
-  if (!check_ajax_referer( 'wp-jam-number', 'security')) {
-return wp_send_json_error('Invalid Nonce');
-}
-
-// This is for current values for link creation
-  update_option( 'wp-jam-session-current-value', $_POST['data'], 'yes' );
-  $created_link = (!empty(get_option('wp-jam-session-url-link'))) ? get_option('wp-jam-session-url-link') . '?' . get_option('wp-jam-session-url-para') . '=' . get_option('wp-jam-session-current-value'): '';
-  return wp_send_json_success($created_link);
-wp_die();
-}
-
 // This is run when the save button is hit on the settings page.
 add_action('wp_ajax_save_settings', 'wp_jam_settings_save');
 function wp_jam_settings_save() {

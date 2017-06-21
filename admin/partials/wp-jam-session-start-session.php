@@ -20,6 +20,12 @@
  * @subpackage Wp_Jam_Session/admin
  * @author     Wonkasoft <info@wonkasoft.com>
  */
+if (!defined('ABSPATH')) {
+  echo 'Start Session is exiting';
+  exit;
+}
+
+
   add_action('init', 'register_my_session', 1);
     // Setup session
     function register_my_session() {
@@ -44,10 +50,10 @@
       $set_parmeter = get_option('wp-jam-session-url-para');
       $allowed_value = get_option('wp-jam-session-input-para');
       // Check for empty session then vailidate value then set the session variable
-      if (!$_SESSION[$set_parmeter] && $_GET[$set_parmeter] != '' && in_array($_GET[$set_parmeter], $allowed_value)) {
+      if ((!$set_parmeter) && ($set_parmeter != '')) {
         // Set the session variable
-        $_SESSION[$set_parmeter] = sanitize_text_field($_GET[$set_parmeter]);
-      } elseif (!$_SESSION[$set_parmeter] && $_GET[$set_parmeter] =='') {
+        $set_parmeter = sanitize_text_field($_GET[$set_parmeter]);
+      } elseif ((!$set_parmeter) && ($set_parmeter =='')) {
               
               // session_destroy ();
               // status_header( 404 );
@@ -57,8 +63,8 @@
       }
 
 // If new parameter is set then update session variable 
-      if ($_SESSION[$set_parmeter] != $_GET[$set_parmeter] && $_GET[$set_parmeter] != '') {
-        $_SESSION[$set_parmeter] = sanitize_text_field($_GET[$set_parmeter]);
+      if ($set_parmeter != $set_parmeter && $set_parmeter != '') {
+        $_SESSION[$set_parmeter] = sanitize_text_field($set_parmeter);
         if (!in_array($_SESSION[$set_parmeter], $allowed_value)) {
       // session_destroy();
       // status_header( 401 );
