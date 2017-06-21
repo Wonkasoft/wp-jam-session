@@ -16,9 +16,9 @@ $( document ).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();
 
 // Get accepted values on load
-  if ($('#accepted-values').length > 0) {
+if ($('#accepted-values').length > 0) {
   database_api( 'build_values_list', 'getvalues',WP_JAM_KIT.security);  
-  }
+}
 
 // Tigger a click event for to save settings
 // ajax call for all form data to be stored
@@ -29,21 +29,26 @@ $('#save-settings').click( function(event) {
   database_api('save_settings', data_send, WP_JAM_KIT.security);
 });
 
-$('#copy-btn-id').click( function () {
+ // This calls the copy to clipboard function when the clipboard button is clicked.
+ $('#copy-btn-id').click( function () {
   copy_to_clipboard('#created-url');
 });
-$('.copy-btn-div').click( function () {
+
+ // This calls the copy to clipboard function when the link is clicked.
+ $('.copy-btn-div').click( function () {
   copy_to_clipboard('#created-url');
 });
 
 // Check for woocommerce form type on document ready
-  check_for_woocommerce();
+check_for_woocommerce();
 
 // Check for woocommerce form type on form update
-  $('#type-form').change(function(type_form) {
+$('#type-form').change(function() {
   check_for_woocommerce();
-  });
 });
+
+}); // End of $(document).ready();
+
 
 // Check for woocommerce form type
 // If woocommerce is selected enable woocommerce form type
@@ -67,22 +72,28 @@ function copy_to_clipboard(element) {
 }
 
 // This is for sending data to update in the database or pull data from the database.
-  function database_api( action, data, security) {
-     var postMessage = $('#message');
-     var loading = $('#save-settings .glyphicon');
-     loading.show();
-     var data_to_send = { 
-      action: action, 
-      data: data,
-      security: security
-    };
+function database_api( action, data, security) {
+ var postMessage = $('#message');
+ var loading = $('#save-settings .glyphicon');
+ loading.show();
+ var data_to_send = { 
+  action: action, 
+  data: data,
+  security: security
+};
+
+    // this is the ajax post.
     $.ajax({
       type: "POST",
       dataType: "json",
       url: ajaxurl,
       data: data_to_send,
       success: function(result) {
+
+            // this is for clearing the inputs form.
             $('[name="input-para"]').val('');
+
+            // This section is run when a value item is removed.
             if (action == 'remove_value_item') {
               postMessage.addClass('updated');
               postMessage.html('<p>The accepted value ' + data + ' has been removed.</p>');
@@ -93,48 +104,53 @@ function copy_to_clipboard(element) {
               });
               $('#created-url').val('');
             }
+
+            // This section is run when the settings are save by clicking the save button.
             if (action == 'save_settings') {
               if ((true === result.success) && (result.data !== '')) {
-                postMessage.toggleClass('updated');
+                postMessage.addClass('updated');
                 postMessage.html('<p>' + WP_JAM_KIT.success + '</p>');
                 $('#message>p').delay(5000).slideUp(500);
                 $('#message>p').queue( function() {
-                  $('#message').toggleClass('updated').dequeue();
+                  $('#message').removeClass('updated').dequeue();
                 });
                 $('#created-url').val('');
-                 build_accepted_values(result.data);
-              } else {
-                postMessage.toggleClass('error');
-                postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-                $('#message>p').delay(5000).slideUp(500);
-                $('#message>p').queue( function() {
-                  $('#message').toggleClass('error').dequeue();
-                });
-              }
-              }
-              if (action == 'build_values_list') {
-              if ((true === result.success) && (result.data !== '')) {
                 build_accepted_values(result.data);
               } else {
-                postMessage.toggleClass('error');
+                postMessage.addClass('error');
                 postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
                 $('#message>p').delay(5000).slideUp(500);
                 $('#message>p').queue( function() {
-                  $('#message').toggleClass('error').dequeue();
+                  $('#message').removeClass('error').dequeue();
                 });
               }
+            }
+
+              // This section is run when the list is first being built on the settings page.
+              if (action == 'build_values_list') {
+                if ((true === result.success) && (result.data !== '')) {
+                  build_accepted_values(result.data);
+                } else {
+                  postMessage.addClass('error');
+                  postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+                  $('#message>p').delay(5000).slideUp(500);
+                  $('#message>p').queue( function() {
+                    $('#message').removeClass('error').dequeue();
+                  });
+                }
               }
-            loading.hide();
-      },
-     error: function(error) {
-            postMessage.toggleClass('error');
-            postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
-            $('#message>p').delay(5000).slideUp(500);
-            $('#message>p').queue( function() {
-              $('#message').toggleClass('error').dequeue();
-            });
-          loading.hide();
-          }
+              loading.hide();
+            },
+      // this section is run when the ajax post comes back with an error.
+      error: function(error) {
+        postMessage.addClass('error');
+        postMessage.html('<p>' + WP_JAM_KIT.failure + '</p>');
+        $('#message>p').delay(5000).slideUp(500);
+        $('#message>p').queue( function() {
+          $('#message').removeClass('error').dequeue();
+        });
+        loading.hide();
+      }
     });
   }
 
