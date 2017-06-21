@@ -5,23 +5,6 @@
 * All of the code for your admin-facing JavaScript source
 * should reside in this file.
 *
-* Note: It has been assumed you will write jQuery code here, so the
-* $ function reference has been prepared for usage within the scope
-* of this function.
-*
-* This enables you to define handlers, for when the DOM is ready:
-*
-* $(function() {
-*
-* });
-*
-* When the window is loaded:
-*
-* $( window ).load(function() {
-*
-* });
-*
-* ...and/or other possibilities.
 *
 * Ideally, it is not considered best practise to attach more than a
 * single DOM-ready or window-load handler for a particular page.
@@ -52,7 +35,27 @@ $('#copy-btn-id').click( function () {
 $('.copy-btn-div').click( function () {
   copy_to_clipboard('#created-url');
 });
+
+// Check for woocommerce form type on document ready
+  check_for_woocommerce();
+
+// Check for woocommerce form type on form update
+  $('#type-form').change(function(type_form) {
+  check_for_woocommerce();
+  });
 });
+
+// Check for woocommerce form type
+// If woocommerce is selected enable woocommerce form type
+// If woocommerce is not selected disable woocommerce form type
+function check_for_woocommerce() {
+  var type_form = $('#type-form').val();
+  if ( type_form !== 'WooCommerce') {
+    $('#WC-id').attr('disabled',true);
+  } else {
+    $('#WC-id').attr('disabled',false);
+  }
+}
 
 // For created url copy to clipboard
 function copy_to_clipboard(element) {
@@ -146,8 +149,6 @@ $.each(values, function (i, val) {
   $('#accepted-values').append('<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>');
 });
 
-$('#message').delay(2000).fadeOut();
-
 $('.list-group-item').hover( function() {
   $(this).toggleClass('active');
 });
@@ -170,6 +171,5 @@ $('li.list-group-item').click( function () {
     $('#message').removeClass('updated').dequeue();
   });
 });
-
 }
 })( jQuery );
