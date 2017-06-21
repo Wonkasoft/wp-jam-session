@@ -133,17 +133,8 @@ class Wp_Jam_Session_Admin {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 
-	public function add_action_links() {
-		$base =  'wp-jam-session/wp-jam-session.php';
-		add_filter('plugin_action_links_'. $base, 'add_settings_link');
-
-		function add_settings_link($links) { 
-			$settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>'; 
-			$support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
-			$donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
-			array_unshift($links, $settings_link, $support_link, $donate_link); 
-			return $links; 
-		}
+	public function wp_jam_session_add_action_links() {
+		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-add-action-links.php';
 	}
 
 	public function start_session() {
