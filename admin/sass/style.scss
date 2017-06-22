@@ -44,6 +44,10 @@ span.glyphicon-refresh-animate {
     to { -webkit-transform: rotate(360deg);}
 }
 
+img.jam-logo {
+  max-width: 210px;
+}
+
 div.row {
   margin-top: 15px;
 }
@@ -124,8 +128,8 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
 
 li.list-group-item {
   overflow: hidden;
-  text-overflow: ellipsis;
-  width: 114px;
+  text-overflow: clip;
+  padding: 10px 0 10px 10px;
 }
 
 li.list-group-item:first-child {

@@ -57,22 +57,6 @@ return wp_send_json_error('Invalid Nonce');
   wp_die();
 }
 
-// This is for creating the parameter link that is copied to clipboard by clicking the link on the settings page.
-add_action('wp_ajax_current_value', 'wp_jam_create_link');
-function wp_jam_create_link() {
-
-// Nonce checking
-  if (!check_ajax_referer( 'wp-jam-number', 'security')) {
-return wp_send_json_error('Invalid Nonce');
-}
-
-// This is for current values for link creation
-  update_option( 'wp-jam-session-current-value', $_POST['data'], 'yes' );
-  $created_link = (!empty(get_option('wp-jam-session-url-link'))) ? get_option('wp-jam-session-url-link') . '?' . get_option('wp-jam-session-url-para') . '=' . get_option('wp-jam-session-current-value'): '';
-  return wp_send_json_success($created_link);
-wp_die();
-}
-
 // This is run when the save button is hit on the settings page.
 add_action('wp_ajax_save_settings', 'wp_jam_settings_save');
 function wp_jam_settings_save() {
@@ -97,9 +81,7 @@ $input_para =  strtolower($input_para);
 $type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
 $url_link = (!isset($_POST['url-link'])) ? '': esc_url($_POST['url-link']);
 $field_id = (!isset($_POST['field-id'])) ? '': sanitize_text_field($_POST['field-id']);
-$field_id = str_replace(" ","",$field_id);
-$WC_id = (!isset($_POST['WC-id'])) ? '': sanitize_text_field($_POST['WC-id']);
-$WC_id = str_replace(" ","",$WC_id);
+$field_id = str_replace(" ","",strtolower($field_id));
 $term_time = (!isset($_POST['term-time'])) ? '': sanitize_text_field($_POST['term-time']);
 $term_time = str_replace(" ","",$term_time);
 $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
@@ -124,6 +106,11 @@ $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('
     update_option( 'wp-jam-session-url-link', $url_link, 'yes' );
   }
 
+  if ( !empty($_POST['term-time']) ) {
+
+    update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
+  }
+  
   if ( !empty($_POST['input-para']) ) {
     $input_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('wp-jam-session-input-para'): array();
     $input_para = str_replace(",", " ", $input_para);
@@ -142,14 +129,5 @@ $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('
     wp_send_json_success($values_array);
   }
 
-  if ( !empty($_POST['WC-id']) ) {
-
-    update_option( 'wp-jam-session-WC-id', $WC_id, 'yes' );
-  }
-
-  if ( !empty($_POST['term-time']) ) {
-
-    update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
-  }
   wp_die();
 }

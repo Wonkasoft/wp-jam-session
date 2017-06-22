@@ -25,8 +25,10 @@ if ($('#accepted-values').length > 0) {
 // in the options table
 $('#save-settings').click( function(event) {
   event.preventDefault();
+  $('#WC-id').attr('disabled', false);
   var data_send = $('#settings-form').serializeArray();
   database_api('save_settings', data_send, WP_JAM_KIT.security);
+  form_selction();
 });
 
  // This calls the copy to clipboard function when the clipboard button is clicked.
@@ -39,28 +41,7 @@ $('#save-settings').click( function(event) {
   copy_to_clipboard('#created-url');
 });
 
-// Check for woocommerce form type on document ready
-check_for_woocommerce();
-
-// Check for woocommerce form type on form update
-$('#type-form').change(function() {
-  check_for_woocommerce();
-});
-
 }); // End of $(document).ready();
-
-
-// Check for woocommerce form type
-// If woocommerce is selected enable woocommerce form type
-// If woocommerce is not selected disable woocommerce form type
-function check_for_woocommerce() {
-  var type_form = $('#type-form').val();
-  if ( type_form !== 'WooCommerce') {
-    $('#WC-id').attr('disabled',true);
-  } else {
-    $('#WC-id').attr('disabled',false);
-  }
-}
 
 // For created url copy to clipboard
 function copy_to_clipboard(element) {
@@ -72,15 +53,15 @@ function copy_to_clipboard(element) {
 }
 
 // This is for sending data to update in the database or pull data from the database.
-function database_api( action, data, security) {
- var postMessage = $('#message');
- var loading = $('#save-settings .glyphicon');
- loading.show();
- var data_to_send = { 
-  action: action, 
-  data: data,
-  security: security
-};
+   function database_api( action, data, security) {
+     var postMessage = $('#message');
+     var loading = $('#save-settings .glyphicon');
+     loading.show();
+     var data_to_send = { 
+      action: action, 
+      data: data,
+      security: security
+    };
 
     // this is the ajax post.
     $.ajax({
