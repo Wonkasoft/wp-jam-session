@@ -117,19 +117,19 @@ class Wp_Jam_Session_Admin {
 	}
 
 // Create Admin / Settings page
-	public function display_admin_page() {
+	public function wp_jam_session_display_admin_page() {
 		add_menu_page(
 			'WP Jam Session',
 			'WP Jam Session',
 			'manage_options',
 			'wp-jam-session-settings',
-			array($this,'show_settings_page'),
+			array($this,'wp_jam_session_show_settings_page'),
 			plugins_url("/img/jam-session-box-logo.svg", __FILE__),
 			'8.0'
 			);
 	}
 
-	public function show_settings_page() {
+	public function wp_jam_session_show_settings_page() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 
@@ -137,7 +137,7 @@ class Wp_Jam_Session_Admin {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-add-action-links.php';
 	}
 
-	public function start_session() {
+	public function wp_jam_session_start_session() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
 
