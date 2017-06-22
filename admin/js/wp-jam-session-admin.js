@@ -41,30 +41,7 @@ $('#save-settings').click( function(event) {
   copy_to_clipboard('#created-url');
 });
 
-// Check for woocommerce form type on document ready
-check_for_woocommerce();
-
-// Check for woocommerce form type on form update
-$('#type-form').change(function() {
-  check_for_woocommerce();
-});
-
 }); // End of $(document).ready();
-
-// Check for woocommerce form type
-// If woocommerce is selected enable woocommerce form type
-// If woocommerce is not selected disable woocommerce form type
-function check_for_woocommerce() {
-  var type_form = $('#type-form').val();
-  var wc_id = $('#WC-id');
-  if ('WooCommerce' !== type_form) {
-    wc_id.val('none');
-    wc_id.attr('disabled', true);
-    $('#WC-id option:first-child').attr('selected', true);
-  } else {
-    wc_id.attr('disabled', false);
-  }
-}
 
 // For created url copy to clipboard
 function copy_to_clipboard(element) {

@@ -20,6 +20,11 @@
  * @subpackage Wp_Jam_Session/admin
  * @author     Wonkasoft <info@wonkasoft.com>
  */
+if (!defined('ABSPATH')) {
+  echo 'This session is exiting';
+  exit;
+}
+
    $GLOBALS['set_parmeter'] = get_option('wp-jam-session-url-para');
    $GLOBALS['allowed_value'] = get_option('wp-jam-session-input-para');
    $GLOBALS['form_type'] = get_option('wp-jam-session-type-form');
@@ -27,12 +32,10 @@
    $GLOBALS['session_term_time'] = get_option('wp-jam-session-term-time');
    $GLOBALS['WC_form_name'] = strtolower(get_option('wp-jam-session-WC-id'));
 
-
   add_action('init', 'wp_jam_session_register_session', 1);
     // Setup session
     function wp_jam_session_register_session() {
-      if( !session_id() )
-      {
+      if( !session_id() ) {
         session_start();
       }
     }
@@ -64,13 +67,6 @@
     add_action('wp_head', 'header_config');
 
     function header_config() {
- // Load all WP Jam Session options into varables
-   // $set_parmeter = get_option('wp-jam-session-url-para');
-   // $allowed_value = get_option('wp-jam-session-input-para');
-   // $form_type = get_option('wp-jam-session-type-form');
-   // $form_id = get_option('wp-jam-session-field-id');
-   // $session_term_time = get_option('wp-jam-session-term-time');
-   echo '<script>alert("'.$GLOBALS['set_parmeter'].'");</script>';
     // Check for empty session then vailidate value then set the session variable
     if (!$_SESSION[$GLOBALS['set_parmeter']] && $_GET[$GLOBALS['set_parmeter']] != '' && in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value'])) {  
       // Set the session variable
@@ -92,7 +88,7 @@
       $_SESSION['allowed_value'] = $_GET[$GLOBALS['allowed_value']];
       $_SESSION['form_id'] = $GLOBALS['form_id'];
         if (!in_array($_SESSION[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value'])) {
-          
+
         }
       } 
     }
