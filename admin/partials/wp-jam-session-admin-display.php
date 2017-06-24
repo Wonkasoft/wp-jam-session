@@ -79,7 +79,7 @@
           <p>What's not out there? <br />
             What business product/service/tool/app <br />
             would you like someone to create?</p>
-            <button class="btn jam-btn" data-toggle="modal" data-target="#idea-form">REQUEST</button>
+            <button class="btn jam-btn" data-toggle="modal" data-target="#idea-form">FEED BACK</button>
           </div> <!-- end col -->
           <?php
 
@@ -98,7 +98,7 @@
         </div> <!-- end row -->
         <div class="row">
           <div class="col-xs-12 text-center donate-btn">
-            <a href="https://paypal.me/Wonkasoft" target="_blank"><button class="btn jam-btn">DONATE</button></a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7CMR62MS7KCJ" target="_blank"><button class="btn jam-btn">DONATE</button></a>
           </div> <!-- end col -->
         </div> <!-- end row -->
       </div> <!-- end col -->

@@ -31,12 +31,7 @@ $GLOBALS['form_type'] = get_option('wp-jam-session-type-form');
 $GLOBALS['field_id'] = get_option('wp-jam-session-field-id');
 $GLOBALS['session_term_time'] = get_option('wp-jam-session-term-time');
 
-// Register session on init
-add_action('init', 'wp_jam_session_register_session', 1);
-
-// Setup session with expiration time
-function wp_jam_session_register_session() {
-  if( !session_id() ) {
+if( !session_id() ) {
     session_start();
     $add = new DateInterval("PT".$GLOBALS['session_term_time']."H"); // Interval of term in hours
     $date = new DateTime(); // Current time
@@ -44,6 +39,13 @@ function wp_jam_session_register_session() {
     $expiration = $date->format('h'); // loads the expiration time
     $_SESSION['expiration'] = $expiration;
   }
+
+// Register session on init
+add_action('init', 'wp_jam_session_register_session', 1);
+
+// Setup session with expiration time
+function wp_jam_session_register_session() {
+  
 }
 
 add_action('wp_logout', 'wp_jam_session_end_session');
@@ -60,33 +62,23 @@ function wp_jam_session_header_config() {
   $current_set = new DateTime();
   $current_time = $current_set->format('h');
 
+
   // For checking expiration time of a session and destroying that which is expired
   if ( $current_time > $_SESSION['expiration'] ) {
     session_destroy();
   }
 
-  // Check for 
-  if (!$_SESSION[$GLOBALS['set_parmeter']] && $_GET[$GLOBALS['set_parmeter']] != '' && in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value'])) {  
-    
+  if (!empty($_GET[$GLOBALS['set_parmeter']])) {
+  
+  // Check for parameter match and value match, then set session variable.
+  if ( ($_GET[$GLOBALS['set_parmeter']] !== null) && (in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value']))) {  
     // Set the session variable
-    $_SESSION['value'] = sanitize_text_field($_GET[$GLOBALS['set_parmeter']]);
+    $_SESSION['value'] = (!empty($_GET[$GLOBALS['set_parmeter']])) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']]): '';
 
-  } elseif (!$_SESSION[$GLOBALS['set_parmeter']] && $_GET[$GLOBALS['set_parmeter']] =='') {
-
-
-  }
-
-  // If new parameter is set then update session variable 
-  if ($_SESSION[$GLOBALS['set_parmeter']] != $_GET[$GLOBALS['set_parmeter']] && $_GET[$GLOBALS['set_parmeter']] != '') {
-
-    // Set the session variable
-    $_SESSION['value'] = sanitize_text_field($_GET[$GLOBALS['set_parmeter']]);
-    $_SESSION['allowed_value'] = $_GET[$GLOBALS['allowed_value']];
-
-    if (!in_array($_SESSION[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value'])) {
-
-    }
+    var_dump($_SESSION['value'] . ' inside check');
   } 
+  }
+  var_dump($_SESSION['value'] . ' outside check');
 }
 
 // Add value to the selected woocommerce form, from the session variable
