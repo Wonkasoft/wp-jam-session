@@ -75,10 +75,8 @@ function wp_jam_session_header_config() {
     // Set the session variable
     $_SESSION['value'] = (!empty($_GET[$GLOBALS['set_parmeter']])) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']]): '';
 
-    var_dump($_SESSION['value'] . ' inside check');
   } 
   }
-  var_dump($_SESSION['value'] . ' outside check');
 }
 
 // Add value to the selected woocommerce form, from the session variable
