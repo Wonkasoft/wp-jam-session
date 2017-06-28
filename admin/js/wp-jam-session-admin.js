@@ -157,7 +157,7 @@ $('.removal-btn').click( function () {
 
 $('li.list-group-item').click( function () {
   var current_id = $(this).parent('.value-containers').attr('id');
-  var url_link = $('#url-link').val();
+  var url_link = $('#page-id').val();
   var url_para = $('#url-para').val();
   $('#message').addClass('updated');
   $('#message').html('<p>Your link has been created below with accepted value ' + current_id + '.</p>');

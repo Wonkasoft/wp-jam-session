@@ -79,7 +79,6 @@ $url_para =  str_replace(' ', '', strtolower($url_para));
 $input_para = (!isset($_POST['input-para'])) ? '': sanitize_text_field($_POST['input-para']);
 $input_para =  strtolower($input_para);
 $type_form = (!isset($_POST['type-form'])) ? '': sanitize_text_field($_POST['type-form']);
-$url_link = (!isset($_POST['url-link'])) ? '': esc_url($_POST['url-link']);
 $field_id = (!isset($_POST['field-id'])) ? '': sanitize_text_field($_POST['field-id']);
 $field_id = str_replace(" ","",strtolower($field_id));
 $term_time = (!isset($_POST['term-time'])) ? '': sanitize_text_field($_POST['term-time']);
@@ -99,11 +98,6 @@ $values_array = (!empty(get_option('wp-jam-session-input-para'))) ? get_option('
   if ( !empty($_POST['field-id']) ) {
 
     update_option( 'wp-jam-session-field-id', $field_id, 'yes' );
-  }
-
-  if ( !empty($_POST['url-link']) ) {
-
-    update_option( 'wp-jam-session-url-link', $url_link, 'yes' );
   }
 
   if ( !empty($_POST['term-time']) ) {
