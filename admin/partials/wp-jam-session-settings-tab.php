@@ -32,15 +32,15 @@
               <label for="url-para">Add URL Parameter: </label>
               <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="url-para" class="form-control" id="url-para" value="<?php echo get_option('wp-jam-session-url-para') ?>" maxlength="15">
-            </div>
-            </div>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
               <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="80">
-            </div>
-            </div>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="type-form">Type of Form: </label>
@@ -96,34 +96,52 @@
                 }
               ?>
               </select>
-            </div>
-            </div>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="field-id">Input Field ID: </label>
               <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>" maxlength="25">
-            </div>
-            </div>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
+            <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="term-time">Set the page URL for parameter link: </label>
+              <p>example: Set a specific page for link creation <span data-toggle="tooltip" data-placement="top" title="Default will be your home page or you can set a page of your choice." class="help-badge"><strong>?</strong></span></p>
+              <?php 
+              global $post;
+              $pages_dropdown = array(
+                'selected' => get_site_url(),
+                'name' => 'page-id',
+                'id' => 'page-id',
+                'class' => 'form-control',
+                'show_option_none' => 'Home by Default',
+                'option_none_value' => get_site_url(),
+                'value_field' => 'guid',
+                );
+              wp_dropdown_pages($pages_dropdown); 
+              ?>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
-            </div>
-            </div>
+            </div> <!-- end form-group -->
+            </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="created-url">Here is your new URL with parameters: </label>
               <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
               <div class="input-group">
-              <input type="hidden" name="url-link" class="form-control" id="url-link" value="<?php echo get_site_url(); ?>">
               <div class="input-group-btn copy-btn-div">
               <input name="created-url" id="created-url" class="form-control" value="" disabled><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
               </div> <!-- end button wrap -->
               </div> <!-- end input-group -->
             </div> <!-- end form-group -->
-            </div>
+            </div> <!-- end of this items col -->
           </div> <!-- end first col -->
           <div class="col-xs-12 col-sm-6 col-md-2">
           <?php 

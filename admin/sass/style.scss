@@ -109,6 +109,7 @@ input.jam-btn {
   padding: 8px 45px;
   background: -webkit-linear-gradient(-214deg, rgba(#63fcff, 0.8) 0%, rgba(#0086aa, 1) 100%);
   background: linear-gradient(-214deg, rgba(#63fcff, 0.8) 0%, rgba(#0086aa, 1) 100%);
+  box-shadow: 0 2px 3px 1px rgba(0,0,0,0.5);
 }
 
 button.jam-btn:hover, button.jam-btn:active, button.jam-btn:focus,
@@ -117,6 +118,7 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
   outline: none;
   background: -webkit-linear-gradient(-214deg, rgba(#0086aa, 0.8) 0%, rgba(#63fcff, 1) 100%);
   background: linear-gradient(-214deg, rgba(#0086aa, 0.8) 0%, rgba(#63fcff, 1) 100%);
+  box-shadow: 0 2px 3px 1.5px rgba(0,0,0,0.5);
 }
 
 .removal-btn {
@@ -157,4 +159,12 @@ div.value-containers {
   margin: 15px;
   overflow: hidden;
   height: 45px;
+}
+
+#faq-tab p {
+  font-size: 14pt;
+}
+
+#first-ad > img, #second-ad > img {
+  box-shadow: 0 2px 3px 1px rgba(0,0,0,0.5);
 }
