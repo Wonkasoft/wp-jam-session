@@ -41,7 +41,7 @@ function wp_jam_session_register_session() {
     $add = new DateInterval("PT".$GLOBALS['session_term_time']."H"); // Interval of term in hours
     $date = new DateTime(); // Current time
     $date->add($add); // adds term time from settings page
-    $expiration = $date->format('h'); // loads the expiration time
+    $expiration = $date->format('H'); // loads the expiration time
     $_SESSION['expiration'] = $expiration;
   }
 }
@@ -58,7 +58,7 @@ add_action('wp_head', 'wp_jam_session_header_config');
 function wp_jam_session_header_config() {
   // load current time for expiration check
   $current_set = new DateTime();
-  $current_time = $current_set->format('h');
+  $current_time = $current_set->format('H');
 
   // For checking expiration time of a session and destroying that which is expired
   if ( $current_time > $_SESSION['expiration'] ) {
