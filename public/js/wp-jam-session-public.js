@@ -15,6 +15,25 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+$(document).ready(function() {
 
+	if ($('form')) {
+		alert('test worked');
+		$.ajax {
+			
+		}
+	}
 
+	// function load_contact_7(field_id) {
+		
+	// }
+
+	// function load_ninja_forms(field_id) {
+		
+	// }
+
+	// function load_gravity_forms(field_id) {
+		
+	// }
+});
 })( jQuery );
