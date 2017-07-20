@@ -25,19 +25,20 @@ if (!defined('ABSPATH')) {
 } 
 
 // Load all settings into globals for checks
-$GLOBALS['set_parmeter'] = get_option('wp-jam-session-url-para');
-$GLOBALS['allowed_value'] = get_option('wp-jam-session-input-para');
-$GLOBALS['form_type'] = get_option('wp-jam-session-type-form');
-$GLOBALS['field_id'] = get_option('wp-jam-session-field-id');
-$GLOBALS['session_term_time'] = get_option('wp-jam-session-term-time');
+$GLOBALS['set_parmeter'] = get_option( 'wp-jam-session-url-para' );
+$GLOBALS['allowed_value'] = get_option( 'wp-jam-session-input-para' );
+$GLOBALS['form_type'] = get_option( 'wp-jam-session-type-form' );
+$GLOBALS['field_id'] = get_option( 'wp-jam-session-field-id' );
+$GLOBALS['session_term_time'] = get_option( 'wp-jam-session-term-time' );
 
+// Check for a started session if not start the session
 if ( !session_id() ) {
   session_start();
-  if ( !$_SESSION['expiration']) {
-    $add = new DateInterval("PT".$GLOBALS['session_term_time']."H"); // Interval of term in hours
+  if ( !$_SESSION['expiration'] ) {
+    $add = new DateInterval( "PT".$GLOBALS['session_term_time']."H" ); // Interval of term in hours
     $date = new DateTime(); // Current time
     $date->add($add); // adds term time from settings page
-    $expiration = $date->format('mdH'); // loads the expiration time
+    $expiration = $date->format( 'mdH' ); // loads the expiration time
     $_SESSION['expiration'] = $expiration;
   }
 }
@@ -49,26 +50,32 @@ function wp_jam_session_end_session() {
   session_destroy ();
 }
 
-add_action('wp_head', 'wp_jam_session_header_config');
+add_action( 'wp_head', 'wp_jam_session_header_config' );
 
 function wp_jam_session_header_config() {
   // load current time for expiration check
   $current_time = date('mdH');
 
-  // For checking expiration time of a session and destroying that which is expired
+  // Checking expiration time of a session and destroying that which is expired
   if ( $current_time > $_SESSION['expiration'] ) {
     session_destroy();
   }
-
-  if (!empty($_GET[$GLOBALS['set_parmeter']])) {
   
+  // Checking the parmeter variable for a set value
+  if ( !empty($_GET[$GLOBALS['set_parmeter']]) ) {
+    
     // Check for parameter match and value match, then set session variable.
     if ( ($_GET[$GLOBALS['set_parmeter']] !== null) && (in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value']))) {  
+      
       // Set the session variable
       $_SESSION['value'] = (!empty($_GET[$GLOBALS['set_parmeter']])) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']]): '';
-
     } 
   }
+}
+
+// Check for form type and if it is WooCommerce run form filter
+if ( $GLOBALS['form_type'] == 'WooCommerce' ) {
+  add_filter( 'woocommerce_checkout_fields', 'wp_jam_session_load_wc_form', 10, 1 );
 }
 
 // Add value to the selected woocommerce form, from the session variable
@@ -80,36 +87,33 @@ function wp_jam_session_load_wc_form( $fields ) {
   return $fields;
 }
 
+// Check for form type and if it is Contact Form 7 run form filter
+if ( $GLOBALS['form_type'] == 'Contact Form 7' ) {
+  add_filter( 'wpcf7_contact_form_properties', 'wp_jam_session_load_cf7_form', 10, 1 );
+}
+
 // Add value to the selected Contact Form 7 form, from the session variable
 function wp_jam_session_load_cf7_form( $properties ) { 
   if ( !empty( $_SESSION['value'] ) ) {
     $form_id = 'id:'.$GLOBALS['field_id'];
     $parameter_value = '"'.$_SESSION['value'].'"';
-    $load_value = str_replace( $form_id, $form_id . ' readonly ' .$parameter_value, $properties['form']);
+    $load_value = str_replace( $form_id, $form_id . ' readonly ' .$parameter_value, $properties['form'] );
     $properties['form'] = $load_value; 
   }
   return $properties; 
 }
 
-// Add value to the selected Ninja form, from the session variable
-function wp_jam_session_load_ninja_form( $data ) { 
-  if($data['label'] == $GLOBALS['field_id'] ) {
-    $data['value'] = $_SESSION['value'];
-  }
-  return $data;
-}
-
-// Check for form type and if it is WooCommerce run form filter
-if ( $GLOBALS['form_type'] == 'WooCommerce' ) {
-  add_filter( 'woocommerce_checkout_fields', 'wp_jam_session_load_wc_form' );
-}
-
-// Check for form type and if it is Contact Form 7 run form filter
-if ( $GLOBALS['form_type'] == 'Contact Form 7' ) {
-  add_filter( 'wpcf7_contact_form_properties', 'wp_jam_session_load_cf7_form' );
-}
-
 // Check for form type and if it is Ninja Forms run form filter
 if ( $GLOBALS['form_type'] == 'Ninja Forms' ) {
-  add_filter( 'ninja_forms_field', 'wp_jam_session_load_ninja_form' );
+  add_filter( 'ninja_forms_render_default_value', 'wp_jam_session_load_ninja_form', 10, 3 );
+}
+
+// Add value to the selected Ninja form, from the session variable
+function wp_jam_session_load_ninja_form( $default_value, $field_class, $field_settings ) { 
+    if ( !empty( $_SESSION['value'] ) ) {
+      if ( $field_settings['label'] == $GLOBALS['field_id'] ) {
+        $default_value = $_SESSION['value'];
+      }
+    }
+  return $default_value;
 }

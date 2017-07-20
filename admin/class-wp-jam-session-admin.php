@@ -99,24 +99,25 @@ class Wp_Jam_Session_Admin {
 		 * class.
 		 */
 		
-		// Check to see if bootstrap js is already enqueue before setting the enqueue
+		// enqueue our custom admin js file
 		wp_enqueue_script( $this->plugin_name . '-admin-js', str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, false );
 
+		// Creating a localize script for the ajax features
 		wp_localize_script($this->plugin_name . '-admin-js', 'WP_JAM_KIT', array(
 			'security' => wp_create_nonce( 'wp-jam-number' ),
 			'success' => 'Your options were successfully updated.',
 			'failure' => 'There was an error updating your options.'
 			));
 
+		// Check to see if bootstrap js is already enqueue before setting the enqueue
 		$bootstrapjs = 'bootstrap-js';
 		if ( ( ! wp_script_is( $bootstrapjs, 'enqueued') ) && ( ! wp_script_is($bootstrapjs, 'done') ) ) {
 		 	// enqueue bootstrap js
 			wp_enqueue_script( $bootstrapjs, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', false );
 		} 
-
 	}
 
-// Create Admin / Settings page
+// Active the Admin / Settings page
 	public function wp_jam_session_display_admin_page() {
 		add_menu_page(
 			'WP Jam Session',
@@ -129,17 +130,19 @@ class Wp_Jam_Session_Admin {
 			);
 	}
 
+	// Create the mark up for the admin settings page
 	public function wp_jam_session_show_settings_page() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 
+	// Create the action links on the plugins page
 	public function wp_jam_session_add_action_links() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-add-action-links.php';
 	}
 
+	// Create the session store the parameters into variables and load forms with data
 	public function wp_jam_session_start_session() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-start-session.php';
 	}
-
 	
 }

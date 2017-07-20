@@ -20,12 +20,12 @@
 * @author     Wonkasoft <info@wonkasoft.com>
 */
 $base =  'wp-jam-session/wp-jam-session.php';
-add_filter('plugin_action_links_'. $base, 'wp_jam_session_add_settings_link_filter');
+add_filter( 'plugin_action_links_'. $base, 'wp_jam_session_add_settings_link_filter' , 10, 1);
 
-function wp_jam_session_add_settings_link_filter($links) { 
+function wp_jam_session_add_settings_link_filter( $links ) { 
  $settings_link = '<a href="admin.php?page=wp-jam-session-settings">Settings</a>';
  $support_link = '<a href="https://wonkasoft.com/wp-jam-session" target="blank">Support</a>';
  $donate_link = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate</a>';
- array_unshift($links, $settings_link, $support_link, $donate_link); 
+ array_unshift( $links, $settings_link, $support_link, $donate_link ); 
  return $links; 
 }

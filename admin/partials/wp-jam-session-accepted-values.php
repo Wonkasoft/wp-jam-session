@@ -12,8 +12,8 @@
 */
 ?>
 <div class="text-center">
-<label>Accepted Values</label>
-<p>Click <span class="glyphicon glyphicon-arrow-down"></span> make link.</p>
+	<label>Accepted Values</label>
+	<p>Click <span class="glyphicon glyphicon-arrow-down"></span> make link.</p>
 </div>
 <ul id="accepted-values" class="list-group">
 </ul>

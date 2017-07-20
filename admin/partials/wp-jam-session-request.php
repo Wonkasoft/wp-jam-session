@@ -15,37 +15,37 @@
 <!-- Modal -->
 <div class="modal fade" id="idea-form" role="dialog">
   <div class="modal-dialog">
-    <?php $first_num = rand(0,9); $second_num = rand(0,9); $js_validation = $first_num + $second_num;
+    <?php $first_num = rand( 0,9 ); $second_num = rand( 0,9 ); $js_validation = $first_num + $second_num;
     $errName = "";
     $errEmail = "";
     $errHuman = "";
     $result = "";
-    $js_validate = (!isset($_POST['js-validate'])) ? "": intval($_POST['js-validate']);
-    $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']);
-    $email = (!isset($_POST['email'])) ? "": sanitize_email($_POST['email']);
-    $news_letter = (!isset($_POST['newsletter'])) ? "": sanitize_email($_POST['newsletter']);
-    $message = (!isset($_POST['message'])) ? "": sanitize_textarea_field($_POST['message']);
-    $human = (!isset($_POST['human'])) ? "": intval($_POST['human']);
-    if (isset($_POST['submit'])) {
+    $js_validate = ( !isset( $_POST['js-validate'] ) ) ? "": intval( $_POST['js-validate'] );
+    $name = ( !isset( $_POST['name'] ) ) ? "": sanitize_text_field( $_POST['name'] );
+    $email = ( !isset( $_POST['email'] ) ) ? "": sanitize_email( $_POST['email'] );
+    $news_letter = ( !isset( $_POST['newsletter'] ) ) ? "": sanitize_email( $_POST['newsletter'] );
+    $message = ( !isset( $_POST['message'] ) ) ? "": sanitize_textarea_field( $_POST['message'] );
+    $human = ( !isset( $_POST['human'] ) ) ? "": intval( $_POST['human'] );
+    if ( isset( $_POST['submit'] ) ) {
       $from = 'WP JAM SESSION REQUEST FORM'; 
       $to = 'support@wonkasoft.com'; 
       $subject = 'Message from Jam Session request form';
 
       $body = "From: $name\n E-Mail: $email\n Newsletter: $news_letter\n Message:\n $message";
-      if (!$_POST['name']) {
+      if ( !$_POST['name'] ) {
         $errName = 'Please enter your name';
       }
-      if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+      if ( !$_POST['email'] || !filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) ) {
         $errEmail = 'Please enter a valid email address';
       }
-      if ($human !== $js_validate) {
+      if ( $human !== $js_validate ) {
         $errHuman = 'Your anti-spam is incorrect';
       }
 
       
                   // If there are no errors, send the email
-      if (!$errName && !$errEmail && !$errHuman) {
-        if (mail ($to, $subject, $body, $from)) {
+      if ( !$errName && !$errEmail && !$errHuman ) {
+        if ( mail ( $to, $subject, $body, $from ) ) {
           $result='<div class="alert alert-success">Thank You! I will be in touch</div>';
         } else {
           $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
@@ -64,25 +64,25 @@
         <form id="modal-form" class="form-horizontal" role="form" method="post">
           <div class="form-group">
             <div class="col-xs-12">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php $name = (!isset($_POST['name'])) ? "": sanitize_text_field($_POST['name']); echo $name; ?>">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php $name = ( !isset( $_POST['name'] ) ) ? "": sanitize_text_field( $_POST['name'] ); echo $name; ?>">
               <?php echo "<p class='text-danger'>$errName</p>";?>
             </div>
           </div>
           <div class="form-group">
             <div class="col-xs-12">
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php $email = (!isset($_POST['email'])) ? "": sanitize_email($_POST['email']); echo $email; ?>">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php $email = ( !isset( $_POST['email'] ) ) ? "": sanitize_email( $_POST['email'] ); echo $email; ?>">
               <?php echo "<p class='text-danger'>$errEmail</p>";?>
             </div>
           </div>
           <div class="form-group">
             <div class="col-xs-12">
-              <textarea class="form-control" rows="4" name="message" placeholder="Your Message"><?php $message = (!isset($_POST['message'])) ? "": sanitize_text_field($_POST['message']); echo $message; ?></textarea>
+              <textarea class="form-control" rows="4" name="message" placeholder="Your Message"><?php $message = ( !isset( $_POST['message'] ) ) ? "": sanitize_text_field( $_POST['message'] ); echo $message; ?></textarea>
             </div>
           </div>
           <div class="form-group">
             <div class="col-xs-12">
               <input type="hidden" class="form-control" id="js-validate" name="js-validate" value="<?php echo $js_validation; ?>">
-              <input type="text" class="form-control" id="human" name="human" placeholder="<?php echo $first_num . ' + ' . $second_num . ' = ? This a human check'; ?>" value="<?php $human = (!isset($_POST['human'])) ? "": sanitize_text_field($_POST['human']); echo $human; ?>">
+              <input type="text" class="form-control" id="human" name="human" placeholder="<?php echo $first_num . ' + ' . $second_num . ' = ? This a human check'; ?>" value="<?php $human = ( !isset( $_POST['human'] ) ) ? "": sanitize_text_field( $_POST['human'] ); echo $human; ?>">
               <?php echo "<p class='text-danger'>$errHuman</p>";?>
             </div>
           </div>

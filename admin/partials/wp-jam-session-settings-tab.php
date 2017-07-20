@@ -15,7 +15,7 @@
 <div id="settings-tab" class="tab-pane fade in active">
   <div class="row title-row">
     <div class="col-xs-12 col-md-3">
-      <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url('/wp-jam-session/admin/img/jam-session-logo.png'); ?>" />
+      <img class="img-responsive block-center jam-logo" src="<?php echo plugins_url( '/wp-jam-session/admin/img/jam-session-logo.png' ); ?>" />
     </div>
     <div class="col-xs-12 col-md-8">
       <h1>WP JAM SESSION</h1>
@@ -31,7 +31,7 @@
             <div class="form-group">
               <label for="url-para">Add URL Parameter: </label>
               <p>example: ?yourParameterHere= <span data-toggle="tooltip" data-placement="top" title="This would be where you would put your custom parameter." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="url-para" class="form-control" id="url-para" value="<?php echo get_option('wp-jam-session-url-para') ?>" maxlength="15">
+              <input type="text" name="url-para" class="form-control" id="url-para" value="<?php echo get_option( 'wp-jam-session-url-para' ) ?>" maxlength="15">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
@@ -47,8 +47,8 @@
               <p>example: Select form plugin <span data-toggle="tooltip" data-placement="top" title="Please select the type of form that you are using." class="help-badge"><strong>?</strong></span></p>
               <select type="select" name="type-form" class="form-control" id="type-form">
               <?php  
-                $selected_option = get_option('wp-jam-session-type-form');
-                switch ($selected_option) {
+                $selected_option = get_option( 'wp-jam-session-type-form' );
+                switch ( $selected_option ) {
                   case 'WooCommerce': ?>
                     <option value="" disabled>Select your option</option>
                     <option value="WooCommerce" selected>WooCommerce</option>
@@ -102,7 +102,7 @@
             <div class="form-group">
               <label for="field-id">Input Field ID: </label>
               <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option('wp-jam-session-field-id') ?>" maxlength="25">
+              <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option( 'wp-jam-session-field-id' ) ?>" maxlength="25">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
@@ -120,7 +120,7 @@
                 'option_none_value' => get_site_url(),
                 'value_field' => 'guid',
                 );
-              wp_dropdown_pages($pages_dropdown); 
+              wp_dropdown_pages( $pages_dropdown ); 
               ?>
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
@@ -128,7 +128,7 @@
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option('wp-jam-session-term-time') ?>" maxlength="2">
+              <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option( 'wp-jam-session-term-time' ) ?>" maxlength="2">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
