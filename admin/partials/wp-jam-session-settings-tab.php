@@ -1,12 +1,10 @@
  <?php
 /**
  * Provide a markup area for the settings form for the plugin
- *
  * This file is used to markup the settings form aspects of the plugin.
  *
  * @link       https://wonkasoft.com
  * @since      1.0.0
- *
  * @package    Wp_Jam_Session
  * @subpackage Wp_Jam_Session/admin/partials
  */
@@ -49,48 +47,58 @@
               <?php  
                 $selected_option = get_option( 'wp-jam-session-type-form' );
                 switch ( $selected_option ) {
+                  
                   case 'WooCommerce': ?>
-                    <option value = "" disabled>Select your option</option>
-                    <option value = "WooCommerce" selected>WooCommerce</option>
-                    <option value = "Contact Form 7">Contact Form 7</option>
-                    <option value = "Ninja Forms">Ninja Forms</option>
-                    <option value = "Gravity Forms">Gravity Forms</option>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce" selected>WooCommerce</option>
+                    <option value="Contact Form 7">Contact Form 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms - pro version only</option>
+
                     <?php
                     break;
 
-                    case 'Contact Form 7': ?>
-                    <option value = "" disabled>Select your option</option>
-                    <option value = "WooCommerce">WooCommerce</option>
-                    <option value = "Contact Form 7" selected>Contact Form 7</option>
-                    <option value = "Ninja Forms">Ninja Forms</option>
-                    <option value = "Gravity Forms">Gravity Forms</option>
+                    case 'Contact Form 7': 
+                    ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Form 7" selected>Contact Form 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms - pro version only</option>
+                    
                     <?php
                     break;
 
-                    case 'Ninja Forms': ?>
-                    <option value = "" disabled>Select your option</option>
-                    <option value = "WooCommerce">WooCommerce</option>
-                    <option value = "Contact Form 7">Contact Form 7</option>
-                    <option value = "Ninja Forms" selected>Ninja Forms</option>
-                    <option value = "Gravity Forms">Gravity Forms</option>
+                    case 'Ninja Forms': 
+                    ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Form 7">Contact Form 7</option>
+                    <option value="Ninja Forms" selected>Ninja Forms</option>
+                    <option value="Gravity Forms">Gravity Forms - pro version only</option>
+
                     <?php
                     break;
 
-                    case 'Gravity Forms': ?>
-                    <option value = "" disabled>Select your option</option>
-                    <option value = "WooCommerce">WooCommerce</option>
-                    <option value = "Contact Form 7">Contact Form 7</option>
-                    <option value = "Ninja Forms">Ninja Forms</option>
-                    <option value = "Gravity Forms" selected>Gravity Forms</option>
+                    case 'Gravity Forms': 
+                    ?>
+                    <option value="" disabled>Select your option</option>
+                    <option value="WooCommerce">WooCommerce</option>
+                    <option value="Contact Form 7">Contact Form 7</option>
+                    <option value="Ninja Forms">Ninja Forms</option>
+                    <option value="Gravity Forms" selected>Gravity Forms - pro version only</option>
+
                     <?php
                     break;
                   
-                  default: ?>
-                  <option value = "" disabled selected>Select your option</option>
-                  <option value = "WooCommerce">WooCommerce</option>
-                  <option value = "Contact Form 7">Contact Form 7</option>
-                  <option value = "Ninja Forms">Ninja Forms</option>
-                  <option value = "Gravity Forms">Gravity Forms</option>
+                  default: 
+                  ?>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="WooCommerce">WooCommerce</option>
+                  <option value="Contact Form 7">Contact Form 7</option>
+                  <option value="Ninja Forms">Ninja Forms</option>
+                  <option value="Gravity Forms">Gravity Forms - pro version only</option>
+
                   <?php
                     break;
                 }
@@ -137,7 +145,7 @@
               <p>You can quickly copy this by clicking the clipboard button. <span data-toggle="tooltip" data-placement="top" title="You can quickly copy this link by clicking the button to the right of the url." class="help-badge"><strong>?</strong></span></p>
               <div class="input-group">
               <div class="input-group-btn copy-btn-div">
-              <input name="created-url" id="created-url" class="form-control" value="" disabled><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
+              <input name="created-url" id="created-url" class="form-control" value="" readonly="true" =""><button id="copy-btn-id" class="btn btn-info" type="button"><i class="glyphicon glyphicon-copy copy-btn pull-right"></i></button>
               </div> <!-- end button wrap -->
               </div> <!-- end input-group -->
             </div> <!-- end form-group -->
