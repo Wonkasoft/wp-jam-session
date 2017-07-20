@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Provide a markup area for the settings form for the plugin
  *
@@ -50,47 +50,47 @@
                 $selected_option = get_option( 'wp-jam-session-type-form' );
                 switch ( $selected_option ) {
                   case 'WooCommerce': ?>
-                    <option value="" disabled>Select your option</option>
-                    <option value="WooCommerce" selected>WooCommerce</option>
-                    <option value="Contact Form 7">Contact Form 7</option>
-                    <option value="Ninja Forms">Ninja Forms</option>
-                    <option value="Gravity Forms">Gravity Forms</option>
+                    <option value = "" disabled>Select your option</option>
+                    <option value = "WooCommerce" selected>WooCommerce</option>
+                    <option value = "Contact Form 7">Contact Form 7</option>
+                    <option value = "Ninja Forms">Ninja Forms</option>
+                    <option value = "Gravity Forms">Gravity Forms</option>
                     <?php
                     break;
 
                     case 'Contact Form 7': ?>
-                    <option value="" disabled>Select your option</option>
-                    <option value="WooCommerce">WooCommerce</option>
-                    <option value="Contact Form 7" selected>Contact Form 7</option>
-                    <option value="Ninja Forms">Ninja Forms</option>
-                    <option value="Gravity Forms">Gravity Forms</option>
+                    <option value = "" disabled>Select your option</option>
+                    <option value = "WooCommerce">WooCommerce</option>
+                    <option value = "Contact Form 7" selected>Contact Form 7</option>
+                    <option value = "Ninja Forms">Ninja Forms</option>
+                    <option value = "Gravity Forms">Gravity Forms</option>
                     <?php
                     break;
 
                     case 'Ninja Forms': ?>
-                    <option value="" disabled>Select your option</option>
-                    <option value="WooCommerce">WooCommerce</option>
-                    <option value="Contact Form 7">Contact Form 7</option>
-                    <option value="Ninja Forms" selected>Ninja Forms</option>
-                    <option value="Gravity Forms">Gravity Forms</option>
+                    <option value = "" disabled>Select your option</option>
+                    <option value = "WooCommerce">WooCommerce</option>
+                    <option value = "Contact Form 7">Contact Form 7</option>
+                    <option value = "Ninja Forms" selected>Ninja Forms</option>
+                    <option value = "Gravity Forms">Gravity Forms</option>
                     <?php
                     break;
 
                     case 'Gravity Forms': ?>
-                    <option value="" disabled>Select your option</option>
-                    <option value="WooCommerce">WooCommerce</option>
-                    <option value="Contact Form 7">Contact Form 7</option>
-                    <option value="Ninja Forms">Ninja Forms</option>
-                    <option value="Gravity Forms" selected>Gravity Forms</option>
+                    <option value = "" disabled>Select your option</option>
+                    <option value = "WooCommerce">WooCommerce</option>
+                    <option value = "Contact Form 7">Contact Form 7</option>
+                    <option value = "Ninja Forms">Ninja Forms</option>
+                    <option value = "Gravity Forms" selected>Gravity Forms</option>
                     <?php
                     break;
                   
                   default: ?>
-                  <option value="" disabled selected>Select your option</option>
-                  <option value="WooCommerce">WooCommerce</option>
-                  <option value="Contact Form 7">Contact Form 7</option>
-                  <option value="Ninja Forms">Ninja Forms</option>
-                  <option value="Gravity Forms">Gravity Forms</option>
+                  <option value = "" disabled selected>Select your option</option>
+                  <option value = "WooCommerce">WooCommerce</option>
+                  <option value = "Contact Form 7">Contact Form 7</option>
+                  <option value = "Ninja Forms">Ninja Forms</option>
+                  <option value = "Gravity Forms">Gravity Forms</option>
                   <?php
                     break;
                 }
