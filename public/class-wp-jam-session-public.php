@@ -96,7 +96,13 @@ class Wp_Jam_Session_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-public-js', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-public.js', array( 'jquery' ), $this->version, false );
+
+		wp_localize_script( $this->plugin_name . '-public-js', 'WP_JAM_FRONT', array(
+			'security' => wp_create_nonce( 'wp-jam-number' ),
+			'success' => 'Your request was successful.',
+			'failure' => 'There was an error pulling your request.'
+			));
 
 	}
 
