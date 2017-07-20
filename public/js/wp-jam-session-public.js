@@ -17,23 +17,13 @@
 	 */
 $(document).ready(function() {
 
-	if ($('form')) {
-		alert('test worked');
-		$.ajax {
+	if ( $('form') ) {
+		// alert('test worked');
+		// $.ajax {
 			
-		}
+		// }
 	}
 
-	// function load_contact_7(field_id) {
-		
-	// }
-
-	// function load_ninja_forms(field_id) {
-		
-	// }
-
-	// function load_gravity_forms(field_id) {
-		
-	// }
+	
 });
 })( jQuery );
