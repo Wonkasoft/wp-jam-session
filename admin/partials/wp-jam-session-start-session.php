@@ -74,7 +74,7 @@ function wp_jam_session_header_config() {
   if ( ($_GET[$GLOBALS['set_parmeter']] !== null) && (in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value']))) {  
     // Set the session variable
     $_SESSION['value'] = (!empty($_GET[$GLOBALS['set_parmeter']])) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']]): '';
-
+    var_dump($_SESSION['value']);
   } 
   }
 }
