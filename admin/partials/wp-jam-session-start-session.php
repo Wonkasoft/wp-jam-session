@@ -96,7 +96,7 @@ if ( $GLOBALS['form_type'] == 'Contact Form 7' ) {
 
 // Add value to the selected Contact Form 7 form, from the session variable
 function wp_jam_session_load_cf7_form( $properties ) { 
-  if ( !empty( $_SESSION['value'] ) ) {
+  if ( !empty( $_SESSION['value'] ) && !is_admin() ) {
     $form_id = 'id:'.$GLOBALS['field_id'];
     $parameter_value = '"'.$_SESSION['value'].'"';
     $load_value = str_replace( $form_id, $form_id . ' readonly ' .$parameter_value, $properties['form'] );
