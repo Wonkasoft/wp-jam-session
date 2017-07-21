@@ -25,14 +25,16 @@ if (!defined('ABSPATH')) {
 } 
 
 // Load all settings into globals for checks
-$GLOBALS['set_parmeter'] = get_option( 'wp-jam-session-url-para' );
-$GLOBALS['allowed_value'] = get_option( 'wp-jam-session-input-para' );
-$GLOBALS['form_type'] = get_option( 'wp-jam-session-type-form' );
-$GLOBALS['field_id'] = get_option( 'wp-jam-session-field-id' );
-$GLOBALS['session_term_time'] = get_option( 'wp-jam-session-term-time' );
+if ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) {
+  $GLOBALS['set_parmeter'] = get_option( 'wp-jam-session-url-para' );
+  $GLOBALS['allowed_value'] = get_option( 'wp-jam-session-input-para' );
+  $GLOBALS['form_type'] = get_option( 'wp-jam-session-type-form' );
+  $GLOBALS['field_id'] = get_option( 'wp-jam-session-field-id' );
+  $GLOBALS['session_term_time'] = get_option( 'wp-jam-session-term-time' );
+}
 
 // Check for a started session if not start the session
-if ( !session_id() ) {
+if ( !session_id() && !empty( get_option( 'wp-jam-session-term-time' ) ) ) {
   session_start();
   if ( !$_SESSION['expiration'] ) {
     $add = new DateInterval( "PT".$GLOBALS['session_term_time']."H" ); // Interval of term in hours
