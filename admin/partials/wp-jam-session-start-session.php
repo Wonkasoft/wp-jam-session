@@ -99,6 +99,7 @@ function wp_jam_session_load_cf7_form( $properties ) {
   if ( !empty( $_SESSION['value'] ) && !is_admin() ) {
     $form_id = 'id:'.$GLOBALS['field_id'];
     $parameter_value = '"'.$_SESSION['value'].'"';
+    $properties['form'] = strtolower($properties['form']);
     $load_value = str_replace( $form_id, $form_id . ' readonly ' .$parameter_value, $properties['form'] );
     $properties['form'] = $load_value; 
   }
@@ -113,7 +114,7 @@ if ( $GLOBALS['form_type'] == 'Ninja Forms' ) {
 // Add value to the selected Ninja form, from the session variable
 function wp_jam_session_load_ninja_form( $default_value, $field_class, $field_settings ) { 
     if ( !empty( $_SESSION['value'] ) ) {
-      if ( $field_settings['label'] == $GLOBALS['field_id'] ) {
+      if ( $field_settings['label'] = $GLOBALS['field_id'] ) {
         $default_value = $_SESSION['value'];
       }
     }
