@@ -136,7 +136,7 @@
             <div class="form-group">
               <label for="term-time">Session Termination Time: </label>
               <p>example: Time in hours to terminate session <span data-toggle="tooltip" data-placement="top" title="Here you can set the time you allow for the users session." class="help-badge"><strong>?</strong></span></p>
-              <input type="text" name="term-time" class="form-control" id="term-time" value="<?php echo get_option( 'wp-jam-session-term-time' ) ?>" maxlength="2">
+              <input type="text" name="term-time" class="form-control" id="term-time" value="<?php $term_time_check = ( !empty( get_option( 'wp-jam-session-term-time' ) ) ) ? get_option( 'wp-jam-session-term-time' ) : 1; echo $term_time_check; ?>" maxlength="2">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
             <div class="col-xs-12 col-md-6">
