@@ -114,7 +114,7 @@ if ( $GLOBALS['form_type'] == 'Ninja Forms' ) {
 // Add value to the selected Ninja form, from the session variable
 function wp_jam_session_load_ninja_form( $default_value, $field_class, $field_settings ) { 
     if ( !empty( $_SESSION['value'] ) ) {
-      if ( $field_settings['label'] = $GLOBALS['field_id'] ) {
+      if ( strtolower( $field_settings['label'] ) == $GLOBALS['field_id'] ) {
         $default_value = $_SESSION['value'];
       }
     }
