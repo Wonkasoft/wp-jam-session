@@ -36,7 +36,7 @@ if ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) {
 // Check for a started session if not start the session
 if ( !session_id() && !empty( get_option( 'wp-jam-session-term-time' ) ) ) {
   session_start();
-  if ( !$_SESSION['expiration'] ) {
+  if ( !isset( $_SESSION['expiration'] ) ) {
     $add = new DateInterval( "PT".$GLOBALS['session_term_time']."H" ); // Interval of term in hours
     $date = new DateTime(); // Current time
     $date->add($add); // adds term time from settings page
