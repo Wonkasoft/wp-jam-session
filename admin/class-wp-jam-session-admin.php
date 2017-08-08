@@ -70,15 +70,14 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		
-		// Check to see if bootstrap style is already enqueue before setting the enqueue
-		$style = 'bootstrap';
-		if( ! wp_style_is( $style, 'enqueued' ) && ! wp_style_is( $style, 'done' ) ) {
-	    //queue up your bootstrap
-			wp_enqueue_style( $style, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all' );
-		}
+			// Check to see if bootstrap style is already enqueue before setting the enqueue
+			$style = 'bootstrap';
+			if( ! wp_style_is( $style, 'enqueued' ) && ! wp_style_is( $style, 'done' ) ) {
+		    //queue up your bootstrap
+				wp_enqueue_style( $style, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all' );
+			}
 
-		wp_enqueue_style( $this->plugin_name, str_replace( array('http:', 'https:'), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
 	}
 
 	/**

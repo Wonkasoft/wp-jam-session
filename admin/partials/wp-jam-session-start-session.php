@@ -19,7 +19,7 @@
 * @subpackage Wp_Jam_Session/admin
 * @author     Wonkasoft <info@wonkasoft.com>
 */
-if (!defined('ABSPATH')) {
+if ( !defined( 'ABSPATH' ) ) {
   echo 'This session is exiting';
   exit;
 } 
@@ -36,7 +36,7 @@ if ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) {
 // Check for a started session if not start the session
 if ( !session_id() && !empty( get_option( 'wp-jam-session-term-time' ) ) ) {
   session_start();
-  if ( !$_SESSION['expiration'] ) {
+  if ( !isset( $_SESSION['expiration'] ) ) {
     $add = new DateInterval( "PT".$GLOBALS['session_term_time']."H" ); // Interval of term in hours
     $date = new DateTime(); // Current time
     $date->add($add); // adds term time from settings page
@@ -56,7 +56,7 @@ add_action( 'wp_head', 'wp_jam_session_header_config' );
 
 function wp_jam_session_header_config() {
   // load current time for expiration check
-  $current_time = date('mdH');
+  $current_time = date( 'mdH' );
 
   // Checking expiration time of a session and destroying that which is expired
   if ( $current_time > $_SESSION['expiration'] ) {
@@ -64,13 +64,13 @@ function wp_jam_session_header_config() {
   }
   
   // Checking the parmeter variable for a set value
-  if ( !empty($_GET[$GLOBALS['set_parmeter']]) ) {
+  if ( !empty( $_GET[$GLOBALS['set_parmeter']] ) ) {
     
     // Check for parameter match and value match, then set session variable.
-    if ( ($_GET[$GLOBALS['set_parmeter']] !== null) && (in_array($_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value']))) {  
+    if ( $_GET[$GLOBALS['set_parmeter']] !== null &&  in_array( $_GET[$GLOBALS['set_parmeter']], $GLOBALS['allowed_value'] ) ) {  
       
       // Set the session variable
-      $_SESSION['value'] = (!empty($_GET[$GLOBALS['set_parmeter']])) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']]): '';
+      $_SESSION['value'] = ( !empty( $_GET[$GLOBALS['set_parmeter']] ) ) ? sanitize_text_field($_GET[$GLOBALS['set_parmeter']] ): '';
     } 
   }
 }
@@ -99,7 +99,7 @@ function wp_jam_session_load_cf7_form( $properties ) {
   if ( !empty( $_SESSION['value'] ) && !is_admin() ) {
     $form_id = 'id:'.$GLOBALS['field_id'];
     $parameter_value = '"'.$_SESSION['value'].'"';
-    $properties['form'] = strtolower($properties['form']);
+    $properties['form'] = strtolower( $properties['form'] );
     $load_value = str_replace( $form_id, $form_id . ' readonly ' .$parameter_value, $properties['form'] );
     $properties['form'] = $load_value; 
   }
