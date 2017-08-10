@@ -63,14 +63,14 @@
       <div class="row">
         <div class="col-xs-12 text-center">
           <a href="https://wonkasoft.com/clixplit" id="first-ad" target="blank">
-            <img src="<?php echo plugins_url( '/wp-jam-session/admin/img/clixplit-ad.jpg' ); ?>" />
+            <img class="img-responsive center-block" src="<?php echo plugins_url( '/wp-jam-session/admin/img/clixplit-ad.jpg' ); ?>" />
           </a>
         </div> <!-- end col -->
       </div> <!-- end row -->
       <div class="row">
         <div class="col-xs-12 text-center">
           <a href="https://wonkasoft.com" id="second-ad" target="blank">
-            <img src="<?php echo plugins_url( '/wp-jam-session/admin/img/wonkasoft-ad.jpg' ); ?>" />
+            <img class="img-responsive center-block" src="<?php echo plugins_url( '/wp-jam-session/admin/img/wonkasoft-ad.jpg' ); ?>" />
           </a>
         </div> <!-- end col -->
       </div> <!-- end row -->

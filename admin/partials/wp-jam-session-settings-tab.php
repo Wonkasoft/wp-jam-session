@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-xs-12 form-area">
         <form id="settings-form" action="<?php echo plugin_dir_url( __FILE__ ) . 'wp-jam-session-settings-ajax.php'; ?>">
-          <div class="col-xs-12 col-sm-6 col-md-10">
+          <div class="col-xs-12 col-sm-6 col-md-9">
           <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="url-para">Add URL Parameter: </label>
@@ -35,7 +35,7 @@
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="input-para">Inputs for validation: </label>
-              <p>example: ?yourParameterHere=thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
+              <p>example: ?yourParameterHere= thisInputHere <span data-toggle="tooltip" data-placement="top" title="This would be where you would put the input for your parameter." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="input-para" class="form-control" id="input-para" value="" maxlength="80">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
@@ -118,7 +118,6 @@
               <label for="term-time">Set the page URL for parameter link: </label>
               <p>example: Set a specific page for link creation <span data-toggle="tooltip" data-placement="top" title="Default will be your home page or you can set a page of your choice." class="help-badge"><strong>?</strong></span></p>
               <?php 
-              global $post;
               $pages_dropdown = array(
                 'selected' => get_site_url(),
                 'name' => 'page-id',
@@ -151,7 +150,7 @@
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
           </div> <!-- end first col -->
-          <div class="col-xs-12 col-sm-6 col-md-2">
+          <div class="col-xs-12 col-sm-6 col-md-3">
           <?php 
           /**
           *

@@ -134,14 +134,21 @@ input.jam-btn:hover, input.jam-btn:active, input.jam-btn:focus {
   z-index: 50;
 }
 
-li.list-group-item {
-  overflow: hidden;
-  text-overflow: clip;
-  padding: 10px 0 10px 10px;
+#accepted-values > li {
+ margin: 0;
 }
 
-li.list-group-item:first-child {
+input.list-group-item {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+input.list-group-item:first-child {
   border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
 }
 
 #accepted-values span.input-group-addon {

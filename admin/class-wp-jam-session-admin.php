@@ -70,14 +70,19 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-			// Check to see if bootstrap style is already enqueue before setting the enqueue
-			$style = 'bootstrap';
-			if( ! wp_style_is( $style, 'enqueued' ) && ! wp_style_is( $style, 'done' ) ) {
-		    //queue up your bootstrap
-				wp_enqueue_style( $style, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all' );
-			}
 
-			wp_enqueue_style( $this->plugin_name, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
+		// Enqueued bootstrap only on our settings page
+		if ( get_current_screen()->base == 'toplevel_page_wp-jam-session-settings' ) {
+		// Check to see if bootstrap style is already enqueue before setting the enqueue
+		$style = 'bootstrap';
+		if( ! wp_style_is( $style, 'enqueued' ) &&  ! wp_style_is( $style, 'done' ) ) {
+	    //queue up your bootstrap
+			wp_enqueue_style( $style, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css'), array(), '3.3.7', 'all');
+		}
+
+		wp_enqueue_style( $this->plugin_name, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'css/wp-jam-session-admin.css'), array(), $this->version, 'all' );
+
+		}
 	}
 
 	/**
@@ -97,6 +102,7 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		if (get_current_screen()->base == 'toplevel_page_wp-jam-session-settings' ) {
 		
 		// enqueue our custom admin js file
 		wp_enqueue_script( $this->plugin_name . '-admin-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, true );
@@ -110,10 +116,11 @@ class Wp_Jam_Session_Admin {
 
 		// Check to see if bootstrap js is already enqueue before setting the enqueue
 		$bootstrapjs = 'bootstrap-js';
-		if ( ! wp_script_is( $bootstrapjs, 'enqueued') && ! wp_script_is( $bootstrapjs, 'done' ) ) {
+		if ( ! wp_script_is( $bootstrapjs, 'enqueued' ) && ! wp_script_is($bootstrapjs, 'done' ) ) {
 		 	// enqueue bootstrap js
-			wp_enqueue_script( $bootstrapjs, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js'), array( 'jquery' ), '3.3.7', true );
+			wp_enqueue_script( $bootstrapjs, str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js' ), array( 'jquery' ), '3.3.7', true );
 		} 
+		}
 	}
 
 // Active the Admin / Settings page
@@ -123,8 +130,8 @@ class Wp_Jam_Session_Admin {
 			'WP Jam Session',
 			'manage_options',
 			'wp-jam-session-settings',
-			array($this,'wp_jam_session_show_settings_page'),
-			plugins_url("/img/jam-session-box-logo.svg", __FILE__),
+			array( $this,'wp_jam_session_show_settings_page' ),
+			plugins_url( "/img/jam-session-box-logo.svg", __FILE__ ),
 			'8.0'
 			);
 	}
