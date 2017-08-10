@@ -154,7 +154,7 @@ $( 'div.value-containers' ).remove();
 
 // This builds the list of accepted values
 $.each( values , function ( i , val ) {
-	$( '#accepted-values' ).append( '<div class="input-group value-containers" id="' + val + '"><li class="list-group-item">' + val + '</li><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div>' );
+	$( '#accepted-values' ).append( '<li><div class="input-group value-containers" id="' + val + '"><input class="list-group-item" readonly value="' + val + '" /><span class="input-group-addon glyphicon glyphicon-remove-circle btn-danger removal-btn"></span></div></li>' );
 });
 
 $( '.list-group-item' ).hover( function() {
@@ -166,7 +166,7 @@ $( '.removal-btn' ).click( function () {
 	database_api( 'remove_value_item' , value_id , WP_JAM_KIT.security );
 });
 
-$( 'li.list-group-item' ).click( function () {
+$( '#accepted-values input.list-group-item' ).click( function () {
 	var current_id = $( this ).parent( '.value-containers' ).attr( 'id' );
 	var url_link = $( '#page-id' ).val();
 	var url_para = $( '#url-para' ).val();
