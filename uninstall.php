@@ -32,6 +32,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Checking for user permissions before deleting the database 
 if ( current_user_can('manage_options') ) {
+	
 	if ( get_option( 'wp-jam-session-url-para' ) ) {
   		delete_option( 'wp-jam-session-url-para' );
 	}
