@@ -25,12 +25,13 @@ if ( !defined( 'ABSPATH' ) ) {
 } 
 
 // Load all settings into globals for checks
+// $GLOBALS['set_parmeter'] = ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) ? get_option( 'wp-jam-session-url-para' ): '' ;
 if ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) {
-  $GLOBALS['set_parmeter'] = get_option( 'wp-jam-session-url-para' );
-  $GLOBALS['allowed_value'] = get_option( 'wp-jam-session-input-para' );
-  $GLOBALS['form_type'] = get_option( 'wp-jam-session-type-form' );
-  $GLOBALS['field_id'] = get_option( 'wp-jam-session-field-id' );
-  $GLOBALS['session_term_time'] = get_option( 'wp-jam-session-term-time' );
+  $GLOBALS['set_parmeter'] = ( !empty( get_option( 'wp-jam-session-url-para' ) ) ) ? get_option( 'wp-jam-session-url-para' ): '' ;
+  $GLOBALS['allowed_value'] = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_option( 'wp-jam-session-input-para' ): '' ;
+  $GLOBALS['form_type'] = ( !empty( get_option( 'wp-jam-session-type-form' ) ) ) ? get_option( 'wp-jam-session-type-form' ): '' ;
+  $GLOBALS['field_id'] = ( !empty( get_option( 'wp-jam-session-field-id' ) ) ) ? get_option( 'wp-jam-session-field-id' ): '' ;
+  $GLOBALS['session_term_time'] = ( !empty( get_option( 'wp-jam-session-term-time' ) ) ) ? get_option( 'wp-jam-session-term-time' ): '' ;
 }
 
 // Check for a started session if not start the session

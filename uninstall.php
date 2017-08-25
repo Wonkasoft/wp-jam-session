@@ -30,11 +30,25 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+// Checking for user permissions before deleting the database 
 if ( current_user_can('manage_options') ) {
-  delete_option( 'wp-jam-session-url-para' )
-  delete_option( 'wp-jam-session-type-form' )
-  delete_option( 'wp-jam-session-field-id' )
-  delete_option( 'wp-jam-session-input-para' )
-  delete_option( 'wp-jam-session-WC-id' )
-  delete_option( 'wp-jam-session-term-time' )
+	_e( 'Do you want to remove all data from the database' );
+	if ( get_option( 'wp-jam-session-url-para' ) ) {
+  		delete_option( 'wp-jam-session-url-para' );
+	}
+	if ( get_option( 'wp-jam-session-input-para' ) ) {
+  		delete_option( 'wp-jam-session-input-para' );
+	}
+
+	if ( get_option( 'wp-jam-session-type-form' ) ) {
+  		delete_option( 'wp-jam-session-type-form' );
+	}
+
+	if ( get_option( 'wp-jam-session-field-id' ) ) {
+  		delete_option( 'wp-jam-session-field-id' );
+	}
+
+	if ( get_option( 'wp-jam-session-term-time' ) ) {
+  		delete_option( 'wp-jam-session-term-time' );
+	}
 }
