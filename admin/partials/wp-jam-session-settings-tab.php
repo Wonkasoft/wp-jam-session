@@ -109,7 +109,7 @@
             <div class="col-xs-12 col-md-6">
             <div class="form-group">
               <label for="field-id">Input Field ID: </label>
-              <p>example: Form Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
+              <p>example: Input ID to receive parameter input <span data-toggle="tooltip" data-placement="top" title="Place field ID that you want to place the parameters input into." class="help-badge"><strong>?</strong></span></p>
               <input type="text" name="field-id" class="form-control" id="field-id" value="<?php echo get_option( 'wp-jam-session-field-id' ) ?>" maxlength="25">
             </div> <!-- end form-group -->
             </div> <!-- end of this items col -->
