@@ -32,7 +32,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Checking for user permissions before deleting the database 
 if ( current_user_can('manage_options') ) {
-	_e( 'Do you want to remove all data from the database' );
 	if ( get_option( 'wp-jam-session-url-para' ) ) {
   		delete_option( 'wp-jam-session-url-para' );
 	}
