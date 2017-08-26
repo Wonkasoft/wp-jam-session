@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Jam Session
  * Plugin URI:        https://wonkasoft.com/wp-jam-session
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Wonkasoft's WP Jam Session is a plugin that will increase your analytical leverage. Use WP Jam Session to automatically fill in referrals, sales representative IDs, or any additional personalized tags. You can track what you want, how you want it.
  * Version:           1.0.0
  * Author:            Wonkasoft
  * Author URI:        https://wonkasoft.com
