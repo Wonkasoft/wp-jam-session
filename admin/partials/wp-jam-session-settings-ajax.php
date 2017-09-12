@@ -73,19 +73,19 @@ foreach ( $_POST['data'] as $key => $value ) {
   $_POST[$name] = $value;
 }
 
-// This is just for sanitizing all the data that was sent.
-$url_para = ( !isset( $_POST['url-para'] ) ) ? '': sanitize_text_field( $_POST['url-para'] );
-$url_para =  str_replace( ' ', '', strtolower( $url_para ) );
-$input_para = ( !isset( $_POST['input-para'] ) ) ? '': sanitize_text_field( $_POST['input-para'] );
-$input_para =  strtolower( $input_para );
+/**
+ * This portion of the code is to sanitize inputs
+ * and remove all spaces. Then make all inputs to lower case
+ * @since 1.0.0
+ */
+$url_para = ( !isset( $_POST['url-para'] ) ) ? '': sanitize_text_field( str_replace( ' ', '', strtolower( $_POST['url-para'] ) ) );
+$input_para = ( !isset( $_POST['input-para'] ) ) ? '': sanitize_text_field( str_replace( ',', ' ', strtolower( $_POST['input-para'] ) ) );
 $type_form = ( !isset( $_POST['type-form'] ) ) ? '': sanitize_text_field( $_POST['type-form'] );
-$field_id = ( !isset( $_POST['field-id'] ) ) ? '': sanitize_text_field( $_POST['field-id'] );
-$field_id = str_replace( " ","",strtolower( $field_id ) );
-$term_time = ( !isset( $_POST['term-time'] ) ) ? '': sanitize_text_field( $_POST['term-time'] );
-$term_time = str_replace( " ","",$term_time );
+$field_id = ( !isset( $_POST['field-id'] ) ) ? '': sanitize_text_field( str_replace( ' ', '', strtolower( $_POST['field-id'] ) ) );
+$term_time = ( !isset( $_POST['term-time'] ) ) ? 1 : sanitize_text_field( str_replace( ' ', '', $_POST['term-time'] ) );
 $values_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_option( 'wp-jam-session-input-para' ): array();
 
-  if ( !empty( $_POST['url-para'] ) ) {
+  if ( !empty( $_POST['url-para'] ) || $_POST['url-para'] == '' ) {
     update_option( 'wp-jam-session-url-para', $url_para, 'yes' );
   }
 
@@ -93,7 +93,7 @@ $values_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_op
     update_option( 'wp-jam-session-type-form', $type_form, 'yes' );
   }
 
-  if ( !empty( $_POST['field-id'] ) ) {
+  if ( !empty( $_POST['field-id'] ) || $_POST['field-id'] == '' ) {
     update_option( 'wp-jam-session-field-id', $field_id, 'yes' );
   }
 
@@ -103,8 +103,7 @@ $values_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_op
   
   if ( !empty( $_POST['input-para'] ) ) {
     $input_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_option( 'wp-jam-session-input-para' ): array();
-    $input_para = str_replace( ",", " ", $input_para );
-    $cleaning_array = explode( " ", $input_para );
+    $cleaning_array = explode( ' ', $input_para );
     foreach ( $cleaning_array as $value ) {
       array_push( $input_array, $value );
     }
