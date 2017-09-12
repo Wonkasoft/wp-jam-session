@@ -85,21 +85,15 @@ $field_id = ( !isset( $_POST['field-id'] ) ) ? '': sanitize_text_field( str_repl
 $term_time = ( !isset( $_POST['term-time'] ) ) ? 1 : sanitize_text_field( str_replace( ' ', '', $_POST['term-time'] ) );
 $values_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_option( 'wp-jam-session-input-para' ): array();
 
-  if ( !empty( $_POST['url-para'] ) || $_POST['url-para'] == '' ) {
+/**
+ * Update the database for all inputs
+ * if post data is blank load default values
+ * @since 1.0.0
+ */
     update_option( 'wp-jam-session-url-para', $url_para, 'yes' );
-  }
-
-  if ( !empty( $_POST['type-form'] ) ) {
     update_option( 'wp-jam-session-type-form', $type_form, 'yes' );
-  }
-
-  if ( !empty( $_POST['field-id'] ) || $_POST['field-id'] == '' ) {
     update_option( 'wp-jam-session-field-id', $field_id, 'yes' );
-  }
-
-  if ( !empty( $_POST['term-time'] ) ) {
     update_option( 'wp-jam-session-term-time', $term_time, 'yes' );
-  }
   
   if ( !empty( $_POST['input-para'] ) ) {
     $input_array = ( !empty( get_option( 'wp-jam-session-input-para' ) ) ) ? get_option( 'wp-jam-session-input-para' ): array();
