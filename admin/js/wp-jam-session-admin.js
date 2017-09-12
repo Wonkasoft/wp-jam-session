@@ -90,8 +90,7 @@ if ( action == 'remove_value_item' ) {
 	postMessage.addClass( 'updated' );
 	postMessage.html( '<p>The accepted value ' + data + ' has been removed.</p>' );
 	build_accepted_values( result.data );
-	$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-	$( '#message>p' ).queue( function() {
+	$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 		$( '#message' ).removeClass( 'updated' ).dequeue();
 	});
 	$( '#created-url' ).val('');
@@ -102,8 +101,7 @@ if ( action == 'save_settings' ) {
 	if ( ( true === result.success ) && ( result.data !== '' ) ) {
 		postMessage.addClass( 'updated' );
 		postMessage.html( '<p>' + WP_JAM_KIT.success + '</p>' );
-		$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-		$( '#message>p' ).queue( function() {
+		$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 			$( '#message' ).removeClass( 'updated' ).dequeue();
 		});
 		$( '#created-url' ).val('');
@@ -111,8 +109,7 @@ if ( action == 'save_settings' ) {
 	} else {
 		postMessage.addClass( 'error' );
 		postMessage.html( '<p>' + WP_JAM_KIT.failure + '</p>' );
-		$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-		$( '#message>p' ).queue( function() {
+		$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 			$( '#message' ).removeClass( 'error' ).dequeue();
 		});
 	}
@@ -125,8 +122,7 @@ if ( action == 'build_values_list' ) {
 	} else {
 		postMessage.addClass( 'error' );
 		postMessage.html( '<p>' + WP_JAM_KIT.failure + '</p>' );
-		$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-		$( '#message>p' ).queue( function() {
+		$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 			$( '#message' ).removeClass( 'error' ).dequeue();
 		});
 	}
@@ -137,8 +133,7 @@ loading.hide();
 error: function( error ) {
 	postMessage.addClass( 'error' );
 	postMessage.html( '<p>' + WP_JAM_KIT.failure + '</p>' );
-	$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-	$( '#message>p' ).queue( function() {
+	$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 		$( '#message' ).removeClass( 'error' ).dequeue();
 	});
 	loading.hide();
@@ -163,6 +158,9 @@ $( '.list-group-item' ).hover( function() {
 
 $( '.removal-btn' ).click( function () {
 	var value_id = $( this ).parent( '.value-containers' ).attr( 'id' );
+	$( this ).parent( '.value-containers' ).queue(function() {
+		$( this ).fadeOut( 500).dequeue();
+	});
 	database_api( 'remove_value_item' , value_id , WP_JAM_KIT.security );
 });
 
@@ -174,8 +172,7 @@ $( '#accepted-values input.list-group-item' ).click( function () {
 	$( '#message' ).html( '<p>Your link has been created below with accepted value ' + current_id + '.</p>' );
 	$( '#created-url' ).val( url_link + '?' + url_para + '=' + current_id );
 
-	$( '#message>p' ).delay( 5000 ).slideUp( 500 );
-	$( '#message>p' ).queue( function() {
+	$( '#message>p' ).delay( 5000 ).slideUp( 500 ).queue( function() {
 		$( '#message' ).removeClass( 'updated' ).dequeue();
 	});
 });
