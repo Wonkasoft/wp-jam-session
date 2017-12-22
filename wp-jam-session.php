@@ -31,6 +31,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
+ * Define contants
+ */
+
+define( 'JAM_SESSION_BASENAME', plugin_basename( __FILE__ ) );
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wp-jam-session-activator.php
  */
