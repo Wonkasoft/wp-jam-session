@@ -4,9 +4,9 @@ Contributors: llister, mrlister1
 Donate link: https://paypal.me/Wonkasoft
 Tags: forms, wonkasoft, sessions, autoload, parameters, custom url,
 Requires at least: 3.0.1
-Tested up to: 4.9.1
+Tested up to: 4.9.5
 Requires PHP: 7.0+
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,13 +49,15 @@ WP Jam Session will fill in the data automatically, even if the prospect leaves 
 
 == Changelog ==
 
+= 1.1.0 = 
+*We have restructured how Wonkasoft tools are going to pile into one place for Wonkasoft Tools.
+
 = 1.0.0 = 
 *Initial version no new changes yet :)
 
 == Upgrade Notice ==
 
-= 1.0.0 = 
-*Initial version no new changes yet :)
+= 1.1.0 = 
+*This is just to fix the Admin Menu to be built in a manner of keeping all Wonkasoft tools in one place.
 
-== Arbitrary section ==
 
