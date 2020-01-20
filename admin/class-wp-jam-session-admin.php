@@ -72,7 +72,7 @@ class Wp_Jam_Session_Admin {
 		 */
 
 		// Enqueued bootstrap only on our settings page
-		if ( get_current_screen()->base == 'toplevel_page_wp-jam-session-settings' ) {
+		if ( get_current_screen()->base == 'wonkasoft-tools_page_wp_jam_session_settings_page' || get_current_screen()->base == 'toplevel_page_wonkasoft_menu' ) {
 		// Check to see if bootstrap style is already enqueue before setting the enqueue
 		$style = 'bootstrap';
 		if( ! wp_style_is( $style, 'enqueued' ) &&  ! wp_style_is( $style, 'done' ) ) {
@@ -102,7 +102,7 @@ class Wp_Jam_Session_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		if (get_current_screen()->base == 'toplevel_page_wp-jam-session-settings' ) {
+		if ( get_current_screen()->base == 'wonkasoft-tools_page_wp_jam_session_settings_page' || get_current_screen()->base == 'toplevel_page_wonkasoft_menu' ) {
 		
 		// enqueue our custom admin js file
 		wp_enqueue_script( $this->plugin_name . '-admin-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wp-jam-session-admin.js'), array( 'jquery' ), $this->version, true );
@@ -125,19 +125,54 @@ class Wp_Jam_Session_Admin {
 
 // Active the Admin / Settings page
 	public function wp_jam_session_display_admin_page() {
-		add_menu_page(
-			'WP Jam Session',
-			'WP Jam Session',
-			'manage_options',
-			'wp-jam-session-settings',
-			array( $this,'wp_jam_session_show_settings_page' ),
-			plugins_url( "/img/jam-session-box-logo.svg", __FILE__ ),
-			'8.0'
+		
+		/**
+		 * This will check for Wonkasoft Tools Menu, if not found it will make it.
+		 */
+		if ( empty ( $GLOBALS['admin_page_hooks']['wonkasoft_menu'] ) ) {
+			
+			global $wp_jam_session_page;
+			$wp_jam_session_page = 'wonkasoft_menu';
+			add_menu_page(
+				'Wonkasoft',
+				'Wonkasoft Tools',
+				'manage_options',
+				'wonkasoft_menu',
+				array( $this,'wp_jam_session_settings_page' ),
+				plugins_url( '/img/wonka-logo-2.svg', __FILE__ ),
+				100
 			);
+
+			add_submenu_page(
+				'wonkasoft_menu',
+				'WP Jam Session',
+				'WP Jam Session',
+				'manage_options',
+				'wonkasoft_menu',
+				array( $this,'wp_jam_session_settings_page' )
+			);
+
+		} else {
+
+			/**
+			 * This creates option page in the settings tab of admin menu
+			 */
+			global $wp_jam_session_page;
+			$wp_jam_session_page = 'wp_jam_session_settings_page';
+			add_submenu_page(
+				'wonkasoft_menu',
+				'WP Jam Session',
+				'WP Jam Session',
+				'manage_options',
+				'wp_jam_session_settings_page',
+				array( $this,'wp_jam_session_settings_page' )
+			);
+
+		}
 	}
 
 	// Create the mark up for the admin settings page
-	public function wp_jam_session_show_settings_page() {
+	public function wp_jam_session_settings_page() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wp-jam-session-admin-display.php';
 	}
 

@@ -1,12 +1,14 @@
 === Plugin Name ===
 WP Jam Session
 Contributors: llister, mrlister1
+Committers: llister, mrlister1
+Support Reps: Wonkasoft
 Donate link: https://paypal.me/Wonkasoft
-Tags: forms, wonkasoft, sessions, autoload, parameters, custom url,
-Requires at least: 3.0.1
-Tested up to: 4.9.5
+Tags: forms, sessions, autoload, parameters, custom url
+Requires at least: 3.8.1
+Tested up to: 5.3.2
 Requires PHP: 7.0+
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +17,8 @@ Wonkasoft's WP Jam Session is a plugin that will increase your analytical levera
 == Description ==
 
 WP Jam Session will fill in the data automatically, even if the prospect leaves the landing page for browsing other pages on your site or leaves the site and comes back. The data will be called when needed. It's a fast, easy, and beautiful way to capture and track data on your landing, squeeze, or checkout pages.
+
+https://www.youtube.com/watch?v=W3L-9d-Y4ZM
 
 == Installation ==
 
@@ -48,6 +52,9 @@ WP Jam Session will fill in the data automatically, even if the prospect leaves 
 1. /assets/screenshot-4.png
 
 == Changelog ==
+
+= 1.1.1 = 
+*Tested with WordPress 5.3.2 refactored code updated logos / icons
 
 = 1.1.0 = 
 *We have restructured how Wonkasoft tools are going to pile into one place for Wonkasoft Tools.

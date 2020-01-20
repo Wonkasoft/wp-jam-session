@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://wonkasoft.com
- * @since             1.0.0
+ * @since             1.1.0
  * @package           Wp_Jam_Session
  *
  * @wordpress-plugin
  * Plugin Name:       WP Jam Session
  * Plugin URI:        https://wonkasoft.com/wp-jam-session
  * Description:       Wonkasoft's WP Jam Session is a plugin that will increase your analytical leverage. Use WP Jam Session to automatically fill in referrals, sales representative IDs, or any additional personalized tags. You can track what you want, how you want it.
- * Version:           1.0.0
+ * Version:           1.1.1
  * Author:            Wonkasoft
  * Author URI:        https://wonkasoft.com
  * License:           GPL-2.0+
@@ -33,8 +33,10 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Define contants
  */
-
+define( 'JAM_SESSION_PATH', plugin_dir_path( __FILE__ ) );
+define( 'JAM_SESSION_NAME', plugin_basename(dirname( __FILE__ ) ) );
 define( 'JAM_SESSION_BASENAME', plugin_basename( __FILE__ ) );
+define( 'JAM_SESSION_VERSION', '1.1.1' );
 
 /**
  * The code that runs during plugin activation.
